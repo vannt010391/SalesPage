@@ -1,0 +1,81 @@
+{% extends "homepage/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <!-- Breadcrumb Section Begin -->
+    <div class="breacrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
+                        <span>Premium</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Breadcrumb Section Begin -->
+
+    <!-- Product Shop Section Begin -->
+    <section class="product-shop spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 order-1 order-lg-2">
+                    <div class="product-list">
+                        <div class="row">
+                            {% for product in page_obj %}
+                            <div class="col-lg-4 col-sm-4">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="media\{{product.productimage}}">
+                                        <div class="sale pp-sale"></div>
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                            <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">{{product.productcategoryid}}</div>
+                                        <a href="#">
+                                            <h5>{{product.productname}}</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            Liên Hệ
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                                
+                            {% endfor %}
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pagination justify-content-center">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-info" href="?page=1" role="button">Trang Đầu</a>
+                    <!-- <a href="?page=1">&laquo; Trang Đầu </a> -->
+                    <a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}" role="button"> Trang Trước </a>
+                {% endif %}
+                <span class="btn btn-outline-danger" class="current" role="button">
+                    Trang {{ page_obj.number }} của {{ page_obj.paginator.num_pages }}
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a class="btn btn-secondary" href="?page={{ page_obj.next_page_number }}" role="button"> Trang Kế </a>
+                    <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}" role="button"> Trang Cuối  &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </section>
+    <!-- Product Shop Section End -->
+
+{% endblock %}

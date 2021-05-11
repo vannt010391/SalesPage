@@ -1,0 +1,296 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="{% static 'homepage/logo/logo1.png' %}">
+    <title>Khánh Vàng Huy Tiến</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="{% static 'homepage/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage/css/font-awesome.min.css'  %}">
+    <link rel="stylesheet" href="{% static 'homepage/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage/css/elegant-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage/css/jquery-ui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage/css/slicknav.min.css' %}">
+    <link rel="stylesheet" href="{% static 'homepage/css/style.css' %}">
+</head>
+
+<body>
+  
+    <!-- Header Section Begin -->
+    <header class="header-section" style=" background-color: #c7b198;">
+        <div class="header-top" style=" background-color: #fff;">
+            <div class="container">
+                <div class="ht-left">
+                    <div class="mail-service">
+                        <i class=" fa fa-envelope"></i>
+                        kvhuytien205207@gmail.com
+                    </div>
+                    <div class="phone-service">
+                        <i class=" fa fa-phone"></i>
+                        0906 168 839
+                    </div>
+                </div>
+                <div class="ht-right">
+                    <a href="{% url 'homepage:register' %}" class="login-panel"><i class="fa fa-user"></i>Đăng Ký</a> 
+                    <a href="{% url 'homepage:login' %}" class="login-panel"><i class="fa fa-user"></i>Đăng Nhập</a>
+                    <div class="top-social">
+                        <a href="#"><i class="ti-facebook"></i></a>
+                        <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                </div>
+                <!-- <div class="ht-right">
+                    <a></a><i class="fa fa-user"></i>Username</a>
+                    <a href="{% url 'homepage:login' %}" class="login-panel"><i class="fa fa-user"></i>Đăng Xuất</a>
+                    <div class="top-social">
+                        <a href="#"><i class="ti-facebook"></i></a>
+                        <a href="#"><i class="fa fa-envelope"></i></a>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <div class="container">
+            <div class="inner-header">
+                <div class="row">
+                    <div class="col-lg-1 col-md-1">
+                    
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                        <div class="logo">
+                            <a href="{% url 'index' %}" >
+                                <img src="{% static '/homepage/img/logohuytien.png' alt='' %}">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-md-7">
+                        <div class="advanced-search">
+                            <button type="button" class="category-btn">DANH MỤC</button>
+                            <div class="input-group">
+                                <input type="text" placeholder="Nhập từ khóa">
+                                <button type="button"><i class="ti-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 text-right col-md-2">
+                        <ul class="nav-right">
+                            <li class="heart-icon">
+                                <a href="#">
+                                    <i class="icon_heart_alt"></i>
+                                    <span></span>
+                                </a>
+                            </li>
+                            <li class="cart-icon">
+                                <a href="#">
+                                    <i class="icon_bag_alt"></i>
+                                    <span></span>
+                                </a>
+                                <div class="cart-hover">
+                                    <div class="select-items">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="si-pic"><img src="" alt=""></td>
+                                                    <td class="si-text">
+                                                        <div class="product-selected">
+                                                            <p></p>
+                                                            <h6></h6>
+                                                        </div>
+                                                    </td>
+                                                    <td class="si-close">
+                                                        <i class="ti-close"></i>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="si-pic"><img src="" alt=""></td>
+                                                    <td class="si-text">
+                                                        <div class="product-selected">
+                                                            <p></p>
+                                                            <h6></h6>
+                                                        </div>
+                                                    </td>
+                                                    <td class="si-close">
+                                                        <i class="ti-close"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="select-total">
+                                        <span></span>
+                                        <h5></h5>
+                                    </div>
+                                    <div class="select-button">
+                                        <a href="#" class="primary-btn view-card">Xem Giỏ Hàng</a>
+                                        <a href="#" class="primary-btn checkout-btn">Thanh Toán</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="cart-price"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-item">
+            <div class="container">
+                <div class="nav-depart">
+                    <div class="depart-btn">
+                        <i class="ti-menu"></i>
+                        <span>Danh mục</span>
+                        <ul class="depart-hover">
+                            <li class="active"><a href="#">Qùa Tặng</a></li>
+                            <li><a href="#">Nội thất Phong Thủy</a></li>
+                            <li><a href="#">Thờ Cúng</a></li>
+                                    
+                        </ul>
+                    </div>
+                </div>
+                <nav class="nav-menu mobile-menu">
+                    <ul>
+                        <li><a href="{% url 'index' %}">Trang chủ</a></li>
+                        
+                        <li><a href="{% url 'homepage:product' %}">Sản Phẩm</a>
+                            <!-- <ul class="dropdown">
+                                <li><a href="#">Quà Tặng</a></li>
+                                <li><a href="#">Nội Thất Phong Thuỷ</a></li>
+                                <li><a href="#">Thờ Cúng</a></li>
+                            </ul> -->
+                        </li>
+                        <li><a href="{% url 'homepage:premium' %}">Quà tặng cao cấp</a></li>
+                        <li><a href="{% url 'homepage:about' %}">Về Chúng Tôi</a></li>
+                        <li><a href="{% url 'homepage:blog' %}">Tin tức</a></li>
+                        <li><a href="{% url 'homepage:contact' %}">Liên hệ</a></li>
+                                                
+                    </ul>
+                </nav>
+                <div id="mobile-menu-wrap"></div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+    {% block content %}{% endblock %} 
+                
+    <div class="benefit-items">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="single-benefit">
+                    <div class="sb-icon">
+                        <img src="{% static 'homepage/icon/feature_icon_2.svg' %}" >
+                    </div>
+                    <div class="sb-text">
+                        <h6>Đặt hàng Online</h6>
+                        <p>Hỗ trợ nhanh chóng</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="single-benefit">
+                    <div class="sb-icon">
+                        <img src="{% static 'homepage/icon/feature_icon_3.svg' %}">
+                    </div>
+                    <div class="sb-text">
+                        <h6>Miễn phí vận chuyển</h6>
+                        <p>Cho đơn hàng nội thành</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="single-benefit">
+                    <div class="sb-icon">
+                        <img src="{% static 'homepage/icon/feature_icon_4.svg' %}" alt="">
+                    </div>
+                    <div class="sb-text">
+                        <h6>Đảm bảo chất lượng</h6>
+                        <p>100% Vàng Bạc Thật</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="footer-left">
+                        <div class="footer-logo" >
+                            <a href="{% url 'index' %}" style="color:#e7ab3c; font-size: 22px; font-weight: 700;">KHÁNH VÀNG HUY TIẾN</a>
+                            <!-- <img src="{% static 'homepage/img/logo.png' alt='' %}" > -->
+                        </div>
+                        <ul>
+                            <li>Địa chỉ: 205 Trần Phú, P.4, Q.5,TP. HCM </li>
+                            <li>Điện thoại: 0906 168 839 - 0986 611 079</li>
+                            <li>Email: kvhuytien205207@gmail.com</li>
+                        </ul>
+                        <div class="footer-social">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-twitter"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1">
+                    <div class="footer-widget">
+                        <h5>Thông tin</h5>
+                        <ul>
+                            <li><a href="{% url 'homepage:about' %}">Về chúng tôi</a></li>
+                            <li><a href="#">Giỏ Hàng</a></li>
+                            <li><a href="{% url 'homepage:contact' %}">Liên Hệ</a></li>
+                               </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="newslatter-item">
+                        <h5>Đăng ký để nhận thông tin mới</h5>
+                        <p>Nhận thông báo qua email những tin tức mới về Cửa hàng.</p>
+                        <form action="#" class="subscribe-form">
+                            <input type="text" placeholder="Enter Your Mail">
+                            <button type="button">Subscribe</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-reserved">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="copyright-text">                           
+Copyright &copy;<script>document.write(new Date().getFullYear());</script><i class="fa fa-heart-o" aria-hidden="true"></i> by <a target="_blank">khanhvanghuytien.vn</a>
+                        </div>
+                        <div class="payment-pic">
+                            <img src="img/payment-method.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+
+    <!-- Js Plugins -->
+    <script src="{% static 'homepage/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'homepage/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.zoom.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.dd.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'homepage/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'homepage/js/main.js' %}"></script>
+</body>
+
+</html>

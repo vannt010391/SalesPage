@@ -1,1 +1,2 @@
-# SalesPage
+django==3.0
+pillow

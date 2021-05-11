@@ -1,0 +1,244 @@
+{% extends "homepage/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Hero Section Begin -->
+<section class="hero-section">
+    
+    <!-- <div class="hero-items owl-carousel">
+        {% for slide in slides %}
+        <div class="single-hero-items set-bg product" data-setbg="media/{{slide.image}}">
+        
+        </div>
+        {% endfor %}
+    </div> -->
+    
+    <div class="hero-items owl-carousel">
+        <div id="slider">
+
+            <figure>
+                {% for slide in slides %}
+                <img src="media/{{slide.image}}" alt>
+                {% endfor %}
+            </figure>
+
+        </div>
+    </div>
+    
+</section>
+<!-- Hero Section End -->
+
+<!-- Banner Section Begin -->
+<div class="banner-section spad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="single-banner">
+                    <img src="{% static '/homepage/img/banner/quatang-daidien.png'%}">
+                    <div class="inner-text">
+                        <h4>Quà Tặng</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="single-banner">
+                    <img src="{% static '/homepage/img/banner/phongthuy-daidien.png'%}" alt="">
+                    <div class="inner-text">
+                        <h4>Nội Thất Phong Thủy</h4>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-lg-4">
+                <div class="single-banner">
+                    <img src="{% static '/homepage/img/banner/thocung-daidien.png'%}" alt="">
+                    <div class="inner-text">
+                        <h4>Thờ Cúng</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner Section End -->
+
+<!-- Quà Tặng Banner Section Begin -->
+<section class="women-banner spad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="product-large set-bg" data-setbg="{% static '/homepage/img/banner/quatang-daidien.png' %}">
+                   
+                </div>
+            </div>
+            <div class="col-lg-8 offset-lg-1">
+               <div class="product-slider owl-carousel">
+                    {% for product in products %} 
+                        {% if product.productcategoryid.productcategoryname == 'Quà Tặng' %}  
+                        <div class="product-item">
+                        <div class="pi-pic">
+                                <img src="media\{{product.productimage}}" alt="">
+                                
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="zoom"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{product.productcategoryid}}</div>
+                                <a href="#">
+                                    <h5>{{product.productname}}</h5>
+                                </a>
+                                <div class="product-price">
+                                    Liên Hệ
+                            </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Quà Tặng Banner Section End -->
+
+
+<!-- Nội Thất Phong Thủy Banner Section Begin -->
+<section class="man-banner spad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="product-slider owl-carousel">
+                    {% for product in products %}
+                        {% if product.productcategoryid.productcategoryname == 'Nội Thất Phong Thuỷ' %}
+                        <div class="product-item">
+                            
+                            <div class="pi-pic">
+                                <img src="media\{{product.productimage}}" alt="">
+                            <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                            </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{product.productcategoryid}}</div>
+                                <a href="#">
+                                    <h5>{{product.productname}}</h5>
+                                </a>
+                                <div class="product-price">
+                                    Liên Hệ
+                            </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1">
+                <div class="product-large set-bg m-large" data-setbg="{% static '/homepage/img/banner/phongthuy-daidien.png' alt='' %}">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Nội Thất Phong Thủy Banner Section End -->
+
+
+<!--Thờ cúng Banner Section Begin -->
+<section class="women-banner spad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="product-large set-bg" data-setbg="{% static '/homepage/img/banner/thocung-daidien.png' alt='' %}">
+                    
+                </div>
+            </div>
+            <div class="col-lg-8 offset-lg-1">
+               <div class="product-slider owl-carousel">
+                    {% for product in products %}
+                        {% if product.productcategoryid.productcategoryname == 'Thờ Cúng' %}   
+                        <div class="product-item">
+                        <div class="pi-pic">
+                                <img src="media\{{product.productimage}}" alt="">
+                                
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{product.productcategoryid}}</div>
+                                <a href="#">
+                                    <h5>{{product.productname}}</h5>
+                                </a>
+                                <div class="product-price">
+                                    Liên Hệ
+                            </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        {% endif %}
+
+                    {% endfor %}
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Thờ cúng Banner Section End -->
+
+<!-- Deal Of The Week Section Begin-->
+<section class="deal-of-week set-bg spad" data-setbg="{% static '/homepage/img/nen7.jpg' alt='' %}">
+    <div class="container">
+        <div class="col-lg-6 text-center">
+            <!-- <div class="section-title">
+                <h2>Deal Of The Week</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed<br /> do ipsum dolor sit amet,
+                    consectetur adipisicing elit </p>
+                <div class="product-price">
+                    $35.00
+                    <span>/ HanBag</span>
+                </div>
+            </div> -->
+            <div class="countdown-timer" id="countdown">
+                <div class="cd-item">
+                    <span>56</span>
+                    <p>Days</p>
+                </div>
+                <div class="cd-item">
+                    <span>12</span>
+                    <p>Hrs</p>
+                </div>
+                <div class="cd-item">
+                    <span>40</span>
+                    <p>Mins</p>
+                </div>
+                <div class="cd-item">
+                    <span>52</span>
+                    <p>Secs</p>
+                </div>
+            </div>
+            <a href="{% url 'homepage:product' %}" class="primary-btn">Shop Now</a>
+        </div>
+    </div>
+</section>
+<!-- Deal Of The Week Section End --> 
+
+{% endblock %}
