@@ -1,3 +1,4 @@
 1. Create branch from master
-2. Migrate DB ( "python manage.py makemigrations" and "python manage.py migration)
-3. fix error if it exist
+2. Install package ( " pip install -r requirements.txt ")
+3. Migrate DB ( "python manage.py makemigrations" and "python manage.py migration)
+4. fix error if it exist
