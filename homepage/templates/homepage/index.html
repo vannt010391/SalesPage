@@ -7,20 +7,13 @@
 <!-- Hero Section Begin -->
 <section class="hero-section">
     
-    <!-- <div class="hero-items owl-carousel">
-        {% for slide in slides %}
-        <div class="single-hero-items set-bg product" data-setbg="media/{{slide.image}}">
-        
-        </div>
-        {% endfor %}
-    </div> -->
-    
+       
     <div class="hero-items owl-carousel">
         <div id="slider">
 
             <figure>
                 {% for slide in slides %}
-                <img src="media/{{slide.image}}" alt>
+                <img src="" alt>
                 {% endfor %}
             </figure>
 
@@ -36,26 +29,26 @@
         <div class="row">
             <div class="col-lg-4">
                 <div class="single-banner">
-                    <img src="{% static '/homepage/img/banner/quatang-daidien.png'%}">
+                    <img src="{% static '/homepage/'%}">
                     <div class="inner-text">
-                        <h4>Quà Tặng</h4>
+                        <h4>Product 1</h4>
                     </div>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="single-banner">
-                    <img src="{% static '/homepage/img/banner/phongthuy-daidien.png'%}" alt="">
+                    <img src="{% static '/homepage/'%}" alt="">
                     <div class="inner-text">
-                        <h4>Nội Thất Phong Thủy</h4>
+                        <h4>Product 2</h4>
                     </div>
                 </div>
                 
             </div>
             <div class="col-lg-4">
                 <div class="single-banner">
-                    <img src="{% static '/homepage/img/banner/thocung-daidien.png'%}" alt="">
+                    <img src="{% static '/homepage/'%}" alt="">
                     <div class="inner-text">
-                        <h4>Thờ Cúng</h4>
+                        <h4>Product 3</h4>
                     </div>
                 </div>
             </div>
@@ -75,34 +68,31 @@
             </div>
             <div class="col-lg-8 offset-lg-1">
                <div class="product-slider owl-carousel">
-                    {% for product in products %} 
-                        {% if product.productcategoryid.productcategoryname == 'Quà Tặng' %}  
+                    
                         <div class="product-item">
                         <div class="pi-pic">
-                                <img src="media\{{product.productimage}}" alt="">
+                                <img src="" alt="">
                                 
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
                                 <ul>
                                     <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="zoom"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                                    <li class="zoom"><a href="">+ Quick View</a></li>
                                     
                                 </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">{{product.productcategoryid}}</div>
+                                <div class="catagory-name"></div>
                                 <a href="#">
-                                    <h5>{{product.productname}}</h5>
+                                    <h5></h5>
                                 </a>
                                 <div class="product-price">
                                     Liên Hệ
                             </div>
                             </div>
                         </div>
-                        {% else %}
-                        {% endif %}
-                    {% endfor %}
+                        
                </div>
             </div>
         </div>
@@ -117,37 +107,34 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="product-slider owl-carousel">
-                    {% for product in products %}
-                        {% if product.productcategoryid.productcategoryname == 'Nội Thất Phong Thuỷ' %}
+                    
                         <div class="product-item">
                             
                             <div class="pi-pic">
-                                <img src="media\{{product.productimage}}" alt="">
+                                <img src="" alt="">
                             <div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
                                 <ul>
                                     <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                                    <li class="quick-view"><a href="">+ Quick View</a></li>
                             </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">{{product.productcategoryid}}</div>
+                                <div class="catagory-name"></div>
                                 <a href="#">
-                                    <h5>{{product.productname}}</h5>
+                                    <h5></h5>
                                 </a>
                                 <div class="product-price">
                                     Liên Hệ
                             </div>
                             </div>
                         </div>
-                        {% else %}
-                        {% endif %}
-                    {% endfor %}
+                        
                 </div>
             </div>
             <div class="col-lg-3 offset-lg-1">
-                <div class="product-large set-bg m-large" data-setbg="{% static '/homepage/img/banner/phongthuy-daidien.png' alt='' %}">
+                <div class="product-large set-bg m-large" data-setbg="{% static '/homepage/img/nen7.jpg' alt='' %}">
                    
                 </div>
             </div>
@@ -162,41 +149,37 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3">
-                <div class="product-large set-bg" data-setbg="{% static '/homepage/img/banner/thocung-daidien.png' alt='' %}">
+                <div class="product-large set-bg" data-setbg="{% static '/homepage/img/nen7.jpg alt='' %}">
                     
                 </div>
             </div>
             <div class="col-lg-8 offset-lg-1">
                <div class="product-slider owl-carousel">
-                    {% for product in products %}
-                        {% if product.productcategoryid.productcategoryname == 'Thờ Cúng' %}   
+                      
                         <div class="product-item">
                         <div class="pi-pic">
-                                <img src="media\{{product.productimage}}" alt="">
+                                <img src="" alt="">
                                 
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
                                 <ul>
                                     <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                                    <li class="quick-view"><a href="">+ Quick View</a></li>
                                     
                                 </ul>
                             </div>
                             <div class="pi-text">
-                                <div class="catagory-name">{{product.productcategoryid}}</div>
+                                <div class="catagory-name"></div>
                                 <a href="#">
-                                    <h5>{{product.productname}}</h5>
+                                    <h5></h5>
                                 </a>
                                 <div class="product-price">
                                     Liên Hệ
                             </div>
                             </div>
                         </div>
-                        {% else %}
-                        {% endif %}
-
-                    {% endfor %}
+                        
                </div>
             </div>
         </div>
@@ -208,15 +191,7 @@
 <section class="deal-of-week set-bg spad" data-setbg="{% static '/homepage/img/nen7.jpg' alt='' %}">
     <div class="container">
         <div class="col-lg-6 text-center">
-            <!-- <div class="section-title">
-                <h2>Deal Of The Week</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed<br /> do ipsum dolor sit amet,
-                    consectetur adipisicing elit </p>
-                <div class="product-price">
-                    $35.00
-                    <span>/ HanBag</span>
-                </div>
-            </div> -->
+            
             <div class="countdown-timer" id="countdown">
                 <div class="cd-item">
                     <span>56</span>
