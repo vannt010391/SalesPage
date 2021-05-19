@@ -1,190 +1,427 @@
+<!DOCTYPE html>
 {% extends "homepage/base.html" %}
 
 {% load static %}
 
 {% block content %}
+<head>
 
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/form.css" rel="stylesheet" type="text/css" media="all" />
+<link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="js/jquery1.min.js"></script>
+<!-- start menu -->
+<link href="css/megamenu.css" rel="stylesheet" type="text/css" media="all" />
+<script type="text/javascript" src="js/megamenu.js"></script>
+<script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+<!--start slider -->
+    <link rel="stylesheet" href="css/fwslider.css" media="all">
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/css3-mediaqueries.js"></script>
+    <script src="js/fwslider.js"></script>
+<!--end slider -->
+<script src="js/jquery.easydropdown.js"></script>
+</head>
 <!-- Hero Section Begin -->
-<section class="hero-section">
-    
-       
-    <div class="hero-items owl-carousel">
-        <div id="slider">
 
-            <figure>
-                {% for slide in slides %}
-                <img src="" alt>
-                {% endfor %}
-            </figure>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+          * {
+            box-sizing:border-box
+          }
+          h2 {
+            text-align: center;
+          }
+          /* Slideshow container */
+          .slideshow-container {
+            max-width: 500px;
+            position: relative;
+            margin: auto;
+          }
+          /* Ẩn các slider */
+          .mySlides {
+              display: none;
+          }
+          /* Định dạng nội dung Caption */
+          .text {
+            color: #f2f2f2;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+          }
 
+          /* định dạng các chấm chuyển đổi các slide */
+          .dot {
+            cursor:pointer;
+            height: 13px;
+            width: 13px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+          }
+          /* khi được hover, active đổi màu nền */
+          .active, .dot:hover {
+            background-color: #717171;
+          }
+
+          /* Thêm hiệu ứng khi chuyển đổi các slide */
+          .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 3s;
+            animation-name: fade;
+            animation-duration: 3s;
+          }
+
+          @-webkit-keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+          }
+
+          @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
+          }
+        </style>
+    </head>
+    <body>
+      <div class="slideshow-container">
+        <div class="mySlides fade">
+          <img src="{% static '/homepage/img/mau-poster-khuyen-mai-3.jpg'%}" style="width:100%">
+          <div class="text">Nội dung caption của slide đầu tiên!</div>
         </div>
-    </div>
-    
-</section>
+
+        <div class="mySlides fade">
+          <img src="{% static '/homepage/img/SALE.jpg'%}" style="width:100%">
+          <div class="text">Nội dung caption của slide thứ 2!</div>
+        </div>
+
+        <div class="mySlides fade">
+          <img src="{% static '/homepage/img/Sale Fila.jpg'%}" style="width:100%">
+          <div class="text">Nội dung caption của slide thứ 3!</div>
+        </div>
+      </div>
+      <br>
+
+      <div style="text-align:center">
+        <span class="dot" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+      </div>
+    </body>
+    <script>
+      //khai báo biến slideIndex đại diện cho slide hiện tại
+      var slideIndex;
+      // KHai bào hàm hiển thị slide
+      function showSlides() {
+          var i;
+          var slides = document.getElementsByClassName("mySlides");
+          var dots = document.getElementsByClassName("dot");
+          for (i = 0; i < slides.length; i++) {
+             slides[i].style.display = "none";
+          }
+          for (i = 0; i < dots.length; i++) {
+              dots[i].className = dots[i].className.replace(" active", "");
+          }
+
+          slides[slideIndex].style.display = "block";
+          dots[slideIndex].className += " active";
+          //chuyển đến slide tiếp theo
+          slideIndex++;
+          //nếu đang ở slide cuối cùng thì chuyển về slide đầu
+          if (slideIndex > slides.length - 1) {
+            slideIndex = 0
+          }
+          //tự động chuyển đổi slide sau 5s
+          setTimeout(showSlides, 5000);
+      }
+      //mặc định hiển thị slide đầu tiên
+      showSlides(slideIndex = 0);
+
+
+      function currentSlide(n) {
+        showSlides(slideIndex = n);
+      }
+    </script>
+</html>
 <!-- Hero Section End -->
 
 <!-- Banner Section Begin -->
-<div class="banner-section spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="single-banner">
-                    <img src="{% static '/homepage/'%}">
-                    <div class="inner-text">
-                        <h4>Product 1</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="single-banner">
-                    <img src="{% static '/homepage/'%}" alt="">
-                    <div class="inner-text">
-                        <h4>Product 2</h4>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="col-lg-4">
-                <div class="single-banner">
-                    <img src="{% static '/homepage/'%}" alt="">
-                    <div class="inner-text">
-                        <h4>Product 3</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Banner Section End -->
+<div class="main">
+	<div class="wrap">
+		<div class="section group">
+		  <div class="cont span_2_of_3">
+		  	<h2 class="head">Nổi bật</h2>
+			<div class="top-box">
+			 <div class="col_1_of_3 span_1_of_3">
+			   <a href="single.html">
+				<div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/ao thun nam 1.jpg'%}" alt=""/>
+					</div>
+                    <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Áo thun nam emp</p>
+							<div class="price1">
+							  <span class="actual">120.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                 </a>
+				</div>
+			   <div class="col_1_of_3 span_1_of_3">
+			   	 <a href="single.html">
+					<div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/áo thun nữ mint basic.png'%}" alt=""/>
+					</div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Áo thun nữ Mint Basic</p>
+							<div class="price1">
+							  <span class="actual">150.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="col_1_of_3 span_1_of_3">
+				 <a href="single.html">
+				  <div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/áo thun nam emspo.jpg'%}" alt=""/>
+					</div>
+                    <div class="sale-box1"><span class="on_sale title_shop">Sale</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+								<p class="title">Áo thun nam Emspo</p>
+							<div class="price1">
+							  <span class="reducedfrom">150.000đ</span>
+							  <span class="actual">120.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="clear"></div>
+			</div>
 
-<!-- Quà Tặng Banner Section Begin -->
-<section class="women-banner spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="product-large set-bg" data-setbg="{% static '/homepage/img/banner/quatang-daidien.png' %}">
-                   
-                </div>
-            </div>
-            <div class="col-lg-8 offset-lg-1">
-               <div class="product-slider owl-carousel">
-                    
-                        <div class="product-item">
-                        <div class="pi-pic">
-                                <img src="" alt="">
-                                
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="zoom"><a href="">+ Quick View</a></li>
-                                    
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name"></div>
-                                <a href="#">
-                                    <h5></h5>
-                                </a>
-                                <div class="product-price">
-                                    Liên Hệ
-                            </div>
-                            </div>
-                        </div>
-                        
-               </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Quà Tặng Banner Section End -->
+			<div class="top-box1">
+			  <div class="col_1_of_3 span_1_of_3">
+			  	 <a href="single.html">
+				 <div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/giày adidas.jpg'%}" alt=""/>
+					</div>
+                     <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Giày ADIDAS</p>
+							<div class="price1">
+							  <span class="actual">3.500.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="col_1_of_3 span_1_of_3">
+				 <a href="single.html">
+					<div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/giày cao gót.jpg'%}" alt=""/>
+					</div>
+					 <div class="sale-box1"><span class="on_sale title_shop">Sale</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Giày cao gót</p>
+							<div class="price1">
+							  <span class="reducedfrom">3.000.000đ</span>
+							  <span class="actual">2.800.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="col_1_of_3 span_1_of_3">
+				  <a href="single.html">
+				 <div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/dép adidas.jpg'%}" alt=""/>
+					</div>
+                   	 <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Dép ADIDAS</p>
+							<div class="price1">
+							  <span class="actual">200.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="clear"></div>
+			</div>
+		  <h2 class="head">Trang sức</h2>
+		  <div class="top-box1">
+			  <div class="col_1_of_3 span_1_of_3">
+			  	 <a href="single.html">
+				 <div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/eropi-Bông_tai_bạc_Brightly_Pearl-21.jpg'%}" alt=""/>
+					</div>
+                     <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Bông tai bạc Brightly Pearl</p>
+							<div class="price1">
+							  <span class="actual">50.000.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="col_1_of_3 span_1_of_3">
+					 <a href="single.html">
+					<div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/eropi-Bông_tai_vàng_18k_ngọc_trai_thật_Rose_8_9mm-21.jpg'%}" alt=""/>
+					</div>
+				    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Bông tai vàng 18k ngọc trai thật Rose 8_9mm</p>
+							<div class="price1">
+							  <span class="actual">34.000.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="col_1_of_3 span_1_of_3">
+				 <a href="single.html">
+				 <div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/eropi-Bộ_trang_sức_bạc_Wonderful_Pearl-21.jpg'%}" alt=""/>
+					</div>
+                   	 <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Bộ trang sức bạc Wonderful Pearl</p>
+							<div class="price1">
+							  <span class="actual">120.000.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="clear"></div>
+			</div>
+	        <h2 class="head">Hot seller</h2>
+		    <div class="section group">
+			  <div class="col_1_of_3 span_1_of_3">
+			  	 <a href="single.html">
+				 <div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/giày tây aokang.jpg'%}" alt=""/>
+					</div>
+                     <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Giày Tây Aokang</p>
+							<div class="price1">
+							  <span class="actual">1.200.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="col_1_of_3 span_1_of_3">
+					<a href="single.html">
+					<div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/eropi-_Nhẫn_vàng_18k_ngọc_trai_thật_Will_6_7mm-21.jpg'%}" alt=""/>
+					</div>
+					 <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Nhẫn vàng 18k ngọc trai thật Will 6_7mm-</p>
+							<div class="price1">
+							  <span class="actual">12.000.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right"> </div>
+						<div class="clear"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="col_1_of_3 span_1_of_3">
+				 <a href="single.html">
+				 <div class="inner_content clearfix">
+					<div class="product_image">
+						<img src="{% static '/homepage/img/đầm polo thêu GUMAC.jpg'%}" alt=""/>
+					</div>
+                   	 <div class="sale-box"><span class="on_sale title_shop">New</span></div>
+                    <div class="price">
+					   <div class="cart-left">
+							<p class="title">Đầm Polo thêu GUMAC</p>
+							<div class="price1">
+							  <span class="actual">120.000đ</span>
+							</div>
+						</div>
+						<div class="cart-right" > </div>
+						<div class="clear" src="{% static '/homepage/img/download.png'%}"></div>
+					 </div>
+                   </div>
+                   </a>
+				</div>
+				<div class="clear"></div>
+			</div>
+		  </div>
 
+	   <div class="clear"></div>
+	</div>
+	</div>
+	</div>
 
-<!-- Nội Thất Phong Thủy Banner Section Begin -->
-<section class="man-banner spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="product-slider owl-carousel">
-                    
-                        <div class="product-item">
-                            
-                            <div class="pi-pic">
-                                <img src="" alt="">
-                            <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="">+ Quick View</a></li>
-                            </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name"></div>
-                                <a href="#">
-                                    <h5></h5>
-                                </a>
-                                <div class="product-price">
-                                    Liên Hệ
-                            </div>
-                            </div>
-                        </div>
-                        
-                </div>
-            </div>
-            <div class="col-lg-3 offset-lg-1">
-                <div class="product-large set-bg m-large" data-setbg="{% static '/homepage/img/nen7.jpg' alt='' %}">
-                   
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Nội Thất Phong Thủy Banner Section End -->
-
-
-<!--Thờ cúng Banner Section Begin -->
-<section class="women-banner spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="product-large set-bg" data-setbg="{% static '/homepage/img/nen7.jpg alt='' %}">
-                    
-                </div>
-            </div>
-            <div class="col-lg-8 offset-lg-1">
-               <div class="product-slider owl-carousel">
-                      
-                        <div class="product-item">
-                        <div class="pi-pic">
-                                <img src="" alt="">
-                                
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="">+ Quick View</a></li>
-                                    
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name"></div>
-                                <a href="#">
-                                    <h5></h5>
-                                </a>
-                                <div class="product-price">
-                                    Liên Hệ
-                            </div>
-                            </div>
-                        </div>
-                        
-               </div>
-            </div>
-        </div>
-    </div>
-</section>
 <!-- Thờ cúng Banner Section End -->
 
 <!-- Deal Of The Week Section Begin-->
