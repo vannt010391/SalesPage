@@ -24,22 +24,24 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+                    <form method="GET" action="{% url 'homepage:search' %}" >
                     <div class="advanced-search">
                         <h4 class="fw-title text-inner font-weight-bold" style="color: crimson;">Tìm kiếm sản phẩm</h4>
                         <p></p>
                         <div class="filter-catagories input-group-prepend">
-                            <input type="text" placeholder="Nhập từ khóa">
-                            <button type="button" class="btn btn-warning"><i class="fa fa-search"></i></button>
+                            <input type="text" placeholder="Nhập từ khóa" name="search">
+                            <button type="submit" class="btn btn-warning"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
+                    </form>
                     <div><p></p></div>
                     <div class="filter-widget">
                         <h4 class="fw-title text-inner font-weight-bold" style="color: crimson;">Danh Mục Sản Phẩm</h4>
+                        {% for product_category in productcategory_list %}
                         <ul class="filter-catagories">
-                            <li><a href="#">Product 1</a></li>
-                            <li><a href="#">Product 2</a></li>
-                            <li><a href="#">Product 3</a></li>
+                            <li><a href="#">{{product_category.productcategoryname}}</a></li>
                         </ul>
+                        {% endfor %}
                     </div>
             </div>
                 <div class="col-lg-9 order-1 order-lg-2">
@@ -47,16 +49,17 @@
                         <div class="row">
                             
                             <div class="col-lg-6 col-sm-6">
+                                {% for product in all_search_results %}
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="">
+                                        <img src="../../../media/{{product.productimage}}" alt="{{product.productimage}}">
                                         <div class="sale pp-sale"></div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="">+ Quick View</a></li>
+                                            <li class="quick-view"><a href="{% url 'homepage:productdetail' product.productid %}">+ Quick View</a></li>
                                         </ul>
                                     </div>
                                     <div class="pi-text">
@@ -65,11 +68,36 @@
                                             <h5></h5>
                                         </a>
                                         <div class="product-price">
-                                            Liên Hệ
-                                        
+                                            Liên Hệ                                       
                                         </div>
                                     </div>
                                 </div>
+                                {% empty %}
+                                {% endfor %}                        
+                                {% for product in page_obj %}
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        <img src="media/{{product.productimage}}" alt="{{product.productimage}}">
+                                        <div class="sale pp-sale"></div>
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                            <li class="quick-view"><a href="{% url 'homepage:productdetail' product.productid %}">+ Quick View</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name"></div>
+                                        <a href="#">
+                                            <h5></h5>
+                                        </a>
+                                        <div class="product-price">
+                                            Liên Hệ                                       
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
                             </div>
                             
                        </div>
@@ -77,7 +105,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="pagination justify-content-center">
+        <div class="pagination justify-content-center">
             <span class="step-links">
                 {% if page_obj.has_previous %}
                     <a class="btn btn-info" href="?page=1" role="button">Trang Đầu</a>
@@ -93,7 +121,7 @@
                     <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}" role="button"> Trang Cuối  &raquo;</a>
                 {% endif %}
             </span>
-        </div> -->
+        </div>
     </section>
     <!-- Product Shop Section End -->
 

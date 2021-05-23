@@ -38,6 +38,8 @@ class ProductCategory(models.Model):
     metaDescriptions = models.TextField(max_length=250,blank=True, null=True)
     isenable = models.BooleanField(blank=True, null=True)
     
+    def __str__(self):
+        return self.productcategoryname
 
     class Meta:
         managed = True
@@ -63,7 +65,7 @@ class Product(models.Model):
     
     
     def __str__(self):
-        return self.productname  
+        return self.productname
 
     class Meta:
         managed = True

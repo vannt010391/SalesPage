@@ -38,17 +38,17 @@
                         </div>
                         <div class="product-thumbs">
                             <div class="product-thumbs-track ps-slider owl-carousel">
-                                <div class="pt active" data-imgbigurl=""><img
-                                        src="" alt=""></div>
-                                
+                                <div class="pt active" data-imgbigurl="">
+                                    <img src="../../../media/{{product.productimage}}" alt="{{product.productimage}}">
+                                </div>                                
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="product-details">
                             <div class="pd-title">
-                                <span>oranges</span>
-                                <h3>Pure Pineapple</h3>
+                                <span>{{product.productcategoryid}}</span>
+                                <h3>{{product.productname}}</h3>
                                 <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
                             </div>
                             <div class="pd-rating">
@@ -60,11 +60,11 @@
                                 <span>(5)</span>
                             </div>
                             <div class="pd-desc">
-                                <p>Nội dung</p>
-                                <h4>Price: Liên Hệ</h4>
+                                <p>Nội dung: {{product.descriptions}}</p>
+                                <h4>Price: {{product.price}}</h4>
                             </div>
                             <div class="pd-color">
-                                <h6>Size: </h6>
+                                <h6>Size: {{product.size}}</h6>
                                 <div class="pd-color-choose">
                                     
                                 </div>
@@ -77,8 +77,8 @@
                                 <a href="#" class="primary-btn pd-cart">Add To Cart</a>
                             </div>
                             <ul class="pd-tags">
-                                <li><span>CATEGORIES</span>:</li>
-                                <li><span>TAGS</span>: </li>
+                                <li><span>CATEGORIES</span>: {{product.productcategoryid}}</li>
+                                <li><span>TAGS</span>: {{product.metatitle}}</li>
                             </ul>
                             
                         </div>
@@ -106,7 +106,7 @@
             <div class="col-lg-4 col-sm-6">
                 <div class="product-item">
                     <div class="pi-pic">
-                        <img src="img/products/women-1.jpg" alt="">
+                        <img src=""" alt="">
                         <div class="sale">Sale</div>
                         <div class="icon">
                             <i class="icon_heart_alt"></i>

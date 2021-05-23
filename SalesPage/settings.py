@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'homepage',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+# Add custom ckeditor upload
+CKEDITOR_UPLOAD_PATH = "img_uploads/"
+CKEDITOR_UPLOAD_SLUGIFY_FILENAME = False
+CKEDITOR_RESTRICT_BY_USER = True
+AWS_QUERYSTRING_AUTH = False
+CKEDITOR_IMAGE_BACKEND = "pillow"
+CKEDITOR_JQUYERY_URL = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': None,
+        'height': 500,
+        'width': 900,
+    },
+}
