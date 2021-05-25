@@ -187,7 +187,7 @@ class Slide(models.Model):
     slideid = models.AutoField(primary_key=True)
     slidename = models.CharField(max_length=50)
     image = models.ImageField(upload_to='slide/')
-    displayorder = models.IntegerField(blank=True, null=True)
+    display= models.IntegerField(blank=True, null=True)
     link = models.URLField(blank=True, null=True)
     descriptions = models.TextField(blank=True, null=True)
     createdate = models.DateTimeField(auto_now_add=True, blank=True, null=True)

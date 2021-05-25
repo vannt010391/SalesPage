@@ -15,8 +15,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 
 def index(request):
-   
-    return render(request, 'homepage/index.html')
+    products = Product.objects.all()
+    slides = Slide.objects.all()
+    return render(request, 'homepage/index.html', {'slides':slides , 'products':products })
+    
     
 def about(request):
     return render(request,'homepage/about.html')
@@ -42,22 +44,22 @@ def mylogin(request):
 def register(request):
     return render(request,'homepage/register.html')
 
-def premium(request):
-    productcategory_list = ProductCategory.objects.all()
-    # Paging
-    paginator = Paginator(productcategory_list, 5)
-    page = request.GET.get('page', 1)
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
+# def premium(request):
+#     productcategory_list = ProductCategory.objects.all()
+#     # Paging
+#     paginator = Paginator(productcategory_list, 5)
+#     page = request.GET.get('page', 1)
+#     try:
+#         products = paginator.page(page)
+#     except PageNotAnInteger:
+#         products = paginator.page(1)
+#     except EmptyPage:
+#         products = paginator.page(paginator.num_pages)
 
-    context = {
-        "page_obj": products
-    }
-    return render(request,'homepage/premium.html')
+#     context = {
+#         "page_obj": products
+#     }
+#     return render(request,'homepage/premium.html')
 
 def product(request):
     productcategory_list = ProductCategory.objects.all()
@@ -78,6 +80,13 @@ def product(request):
         "page_obj": products
     }
     return render(request,'homepage/product.html', context)
+# Chị Vân demo
+def premium(request):
+    products = Product.objects.filter(productcategoryid=4)
+    paginator = Paginator(products, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request,'homepage/premium.html',{'products':products, 'page_obj': page_obj})
 
 class ProductDetail(generic.DetailView):
     model = Product
