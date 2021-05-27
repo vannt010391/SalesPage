@@ -36,4 +36,4 @@ class OrderItemAdmin(admin.ModelAdmin):
 # admin.site.register(Contact)
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ("contactid", "email", "name", "messages")
+    list_display = ("contactid", "email", "name", "messages","status")

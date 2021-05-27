@@ -2,7 +2,7 @@ from typing import Generic
 import homepage
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.contrib import admin
+from django.contrib import admin,messages
 from django.urls import path, include
 from homepage.models import *
 from django.core.paginator import Paginator
@@ -11,7 +11,8 @@ from django.contrib.auth.models import User
 from .models import *
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+import re
+from django import forms
 # Create your views here.
 
 def index(request):
@@ -31,11 +32,22 @@ def contact(request):
         name = request.POST['name']
         email = request.POST['email']
         message = request.POST['message']
-        obj=Contact()
-        obj.name=name
-        obj.email=email
-        obj.messages=message
-        obj.save()
+        if re.match(r'^\w+$', name):
+            if re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b', email):
+                obj=Contact()
+                obj.name=name
+                obj.email=email
+                obj.messages=message
+                obj.save()
+                messages.info(request,"cảm ơn phản hồi của bạn")
+            else:
+                print(1)
+                messages.info(request,"Email của bạn không hợp lệ")
+        else:
+            print(2)
+            messages.SUCCESS(request,"tên của bạn không hợp lệ")
+
+        
     return render(request,'homepage/contact.html')
 
 def mylogin(request):

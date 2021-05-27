@@ -154,14 +154,19 @@ class About(models.Model):
     class Meta:
         managed = True
         db_table = 'About'
-
+STATUS_CONTACT = (
+    ('Wait', 'Chờ xử lý'),
+    ('SPAM', 'SPAM'),
+    ('COMPLETED', 'HOÀN TẤT')
+)
 class Contact(models.Model):
     contactid = models.AutoField(primary_key=True)
     email= models.EmailField(max_length=50,null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     messages = models.TextField(blank=True, null=True)
+    status=models.CharField(choices=STATUS_CONTACT,default='Wait',max_length=50)
     note = models.TextField(max_length=500, blank=True, null=True)
-
+    
     class Meta:
         managed = True
         db_table = 'Contact'
