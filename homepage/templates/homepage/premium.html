@@ -22,37 +22,56 @@
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad">
         <div class="container">
+        <div>
+            <form method="GET" action="{% url 'homepage:searchpremium' %}" >
+                <div class="advanced-search">
+                    <h4 class="fw-title text-inner font-weight-bold" style="color: crimson;">Tìm kiếm sản phẩm</h4>
+                    <p></p>
+                    <div class="filter-catagories input-group-prepend">
+                        <input type="text" placeholder="Nhập từ khóa" name="search">
+                        <button type="submit" class="btn btn-warning"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
             <div class="row">
                 <div class="col-lg-12 order-1 order-lg-2">
                     <div class="product-list">
                         <div class="row">
-                            {% for product in page_obj %}
-                            <div class="col-lg-4 col-sm-4">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="media\{{product.productimage}}">
-                                        <div class="sale pp-sale"></div>
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
+                            {% if page_obj %}
+                                {% for product in page_obj %}
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="product-item">
+                                        <div class="pi-pic">
+                                            <img src="../../../media/{{product.productimage}}" class="img-thumbnail">
+                                            <div class="sale pp-sale"></div>
+                                            <div class="icon">
+                                                <i class="icon_heart_alt"></i>
+                                            </div>
+                                            <ul>
+                                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                                <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                                            </ul>
                                         </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">{{product.productcategoryid}}</div>
-                                        <a href="#">
-                                            <h5>{{product.productname}}</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            Liên Hệ
+                                        <div class="pi-text">
+                                            <div class="catagory-name">{{product.productcategoryid}}</div>
+                                            <a href="{% url 'homepage:productdetail' product.productid %}">
+                                                <h5>{{product.productname}}</h5>
+                                            </a>
+                                            <div class="product-price">
+                                                {% if product.price %}
+                                                    {{product.price}}
+                                                {% else %}
+                                                    Liên Hệ                                      
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div> 
-                                
-                            {% endfor %}
+                                </div>                               
+                                {% endfor %}
+                            {% else %}
+                                Không tìm thấy sản phẩm
+                            {% endif %}
                        </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
-                    <form method="GET" action="{% url 'homepage:search' %}" >
+                    <form method="GET" action="{% url 'homepage:searchproduct' %}" >
                     <div class="advanced-search">
                         <h4 class="fw-title text-inner font-weight-bold" style="color: crimson;">Tìm kiếm sản phẩm</h4>
                         <p></p>
@@ -46,60 +46,42 @@
             </div>
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="product-list">
-                        <div class="row">
-                            
-                            <div class="col-lg-6 col-sm-6">
-                                {% for product in all_search_results %}
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="../../../media/{{product.productimage}}" alt="{{product.productimage}}">
-                                        <div class="sale pp-sale"></div>
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
+                        <div class="row">     
+                            {% if page_obj %}                                                
+                                {% for product in page_obj %}
+                                <div class="col-lg-4 col-sm-4">
+                                    <div class="product-item">
+                                        <div class="pi-pic">
+                                            <img src="../../../media/{{product.productimage}}" alt="{{product.productimage}}">
+                                            <div class="sale pp-sale"></div>
+                                            <div class="icon">
+                                                <i class="icon_heart_alt"></i>
+                                            </div>
+                                            <ul>
+                                                <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                                <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                                            </ul>
                                         </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="{% url 'homepage:productdetail' product.productid %}">+ Quick View</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name"></div>
-                                        <a href="#">
-                                            <h5></h5>
-                                        </a>
-                                        <div class="product-price">
-                                            Liên Hệ                                       
+                                        <div class="pi-text">
+                                            <div class="catagory-name"></div>
+                                            <a href="{% url 'homepage:productdetail' product.productid %}">
+                                                <h3>{{product.productname}}</h3>
+                                            </a>
+                                            <div class="product-price">
+                                                {% if product.price %}
+                                                    {{product.price}}
+                                                {% else %}
+                                                    Liên Hệ                                      
+                                                {% endif %}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div>                               
                                 </div>
                                 {% empty %}
-                                {% endfor %}                        
-                                {% for product in page_obj %}
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="media/{{product.productimage}}" alt="{{product.productimage}}">
-                                        <div class="sale pp-sale"></div>
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="{% url 'homepage:productdetail' product.productid %}">+ Quick View</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name"></div>
-                                        <a href="#">
-                                            <h5></h5>
-                                        </a>
-                                        <div class="product-price">
-                                            Liên Hệ                                       
-                                        </div>
-                                    </div>
-                                </div>
                                 {% endfor %}
-                            </div>
-                            
+                            {% else %}
+                                Không tìm thấy sản phẩm
+                            {% endif %}
                        </div>
                     </div>
                 </div>
@@ -122,6 +104,9 @@
                 {% endif %}
             </span>
         </div>
+
+
+        
     </section>
     <!-- Product Shop Section End -->
 

@@ -5,10 +5,8 @@ from django.http import HttpResponse
 from django.contrib import admin
 from django.urls import path, include
 from homepage.models import *
-from django.core.paginator import Paginator
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from .models import *
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -18,7 +16,6 @@ def index(request):
     products = Product.objects.all()
     slides = Slide.objects.all()
     return render(request, 'homepage/index.html', {'slides':slides , 'products':products })
-    
     
 def about(request):
     return render(request,'homepage/about.html')
@@ -44,42 +41,20 @@ def mylogin(request):
 def register(request):
     return render(request,'homepage/register.html')
 
-# def premium(request):
-#     productcategory_list = ProductCategory.objects.all()
-#     # Paging
-#     paginator = Paginator(productcategory_list, 5)
-#     page = request.GET.get('page', 1)
-#     try:
-#         products = paginator.page(page)
-#     except PageNotAnInteger:
-#         products = paginator.page(1)
-#     except EmptyPage:
-#         products = paginator.page(paginator.num_pages)
-
-#     context = {
-#         "page_obj": products
-#     }
-#     return render(request,'homepage/premium.html')
-
 def product(request):
     productcategory_list = ProductCategory.objects.all()
     product_list = Product.objects.all()
-
-    # Paging
-    paginator = Paginator(product_list, 20)
-    page = request.GET.get('page', 1)
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
-
+    paginator = Paginator(product_list, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
     context = {
         'productcategory_list': productcategory_list,
-        "page_obj": products
+        'product_list': product_list,
+        "page_obj": page_obj
     }
     return render(request,'homepage/product.html', context)
+
 # Chị Vân demo
 def premium(request):
     products = Product.objects.filter(productcategoryid=4)
@@ -88,28 +63,51 @@ def premium(request):
     page_obj = paginator.get_page(page_number)
     return render(request,'homepage/premium.html',{'products':products, 'page_obj': page_obj})
 
-class ProductDetail(generic.DetailView):
-    model = Product
-    template_name = 'homepage/productdetail.html'
+def productdetail(request, id):
+    product = Product.objects.get(productid=id)
+    category = product.productcategoryid
+    relatedproduct = Product.objects.filter(productcategoryid=category)
+    context = {
+        'product': product,
+        'relatedproduct': relatedproduct,
+    }
+    return render(request,'homepage/productdetail.html', context)
 
-class SearchView(generic.ListView):
+
+class SearchViewProduct(generic.ListView):
     model = Product
     template_name = 'homepage/product.html'
     context_object_name = 'all_search_results'
+    paginate_by = 9
 
     def get_queryset(self):
-       result = super(SearchView, self).get_queryset()
-       query = self.request.GET.get('search')
-       if query:
-          postresult = Product.objects.filter(productname__contains=query)
-          result = postresult
-       else:
+        result = super(SearchViewProduct, self).get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+           postresult = Product.objects.filter(productname__contains=query)
+           result = postresult
+        else:
            result = None
-       return result
+        return result
+
+class SearchViewPremium(generic.ListView):
+    model = Product
+    template_name = 'homepage/premium.html'
+    context_object_name = 'all_search_results'
+    paginate_by = 9
+
+    def get_queryset(self):
+        result = super(SearchViewPremium, self).get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+           postresult = Product.objects.filter(productcategoryid=4,productname__contains=query)
+           result = postresult
+        else:
+           result = None
+        return result
 
 def reply(request):
     return render(request,'homepage/reply.html')
 
-    
 
 
