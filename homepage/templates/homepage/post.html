@@ -1,0 +1,46 @@
+
+{% extends "homepage/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<section>
+        
+        
+    <div class="container">
+        <div class="row">
+            <div class="card mb-5 shadow-sm">
+                <br>
+                <header class="header-section" style="background-color: #77ccf3;">
+                    <h1 style="text-align: center;color: rgb(57, 58, 58);font-size:x-large;padding: 10px;"> {{post.title}}</h1>
+                </header>
+                <h6 style="color: rgb(9, 117, 224);"> Ngày tạo: {{post.createdate}} </h6>  
+                <br>
+                <h3> {{post.description|safe|linebreaks}} </h3> 
+            
+                <img src="{{post.blogimage.url}}" style="float: center;" width="300" height="300">
+            </div>
+       
+            <h6> <i class="fa fa-search"></i> Từ khóa tìm kiếm: {{post.metaKeywords}}</h6>
+            <hr> </hr>
+            
+        </div>
+        <div>
+            <h3 style="color: chocolate; font-size: 22px;"> Bài viết liên quan: </h3>
+        {% for Blog in relateblog %}
+        <ul>
+            <div class="panel-footer">
+                <br>
+                <a href="/blog/{{Blog.blogid}}"> <li> {{Blog.title}} </li>  </a> 
+            </div>  
+            
+        </ul>
+        {% endfor %}
+        </div>
+    </div>   
+   
+</section>
+{% endblock %}
+

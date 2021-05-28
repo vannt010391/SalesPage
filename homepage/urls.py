@@ -5,7 +5,6 @@ app_name = 'homepage'
 
 urlpatterns = [
     path('about', views.about, name='about'),
-    path('blog', views.blog, name='blog'),
     path('contact', views.contact, name='contact'),
     path('premium', views.premium, name='premium'),
     path('product', views.product, name='product'),    
@@ -13,6 +12,8 @@ urlpatterns = [
     path('login', views.mylogin, name='login'),
     path('register', views.register, name='register'),
     path('reply',views.reply,name='reply'),
-
     path('results/',views.SearchView.as_view(), name='search'),
+    path('blog', views.blog, name='blog'),
+    path('blog/<int:id>', views.post),
+    
 ]
