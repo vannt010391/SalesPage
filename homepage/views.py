@@ -1,8 +1,12 @@
 from typing import Generic
+from django.http import response
+
+from django.http.response import HttpResponseRedirect
 import homepage
+from .forms import ContactForm
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-from django.contrib import admin
+from django.contrib import admin,messages
 from django.urls import path, include
 from homepage.models import *
 from django.core.paginator import Paginator
@@ -11,7 +15,8 @@ from django.contrib.auth.models import User
 from .models import *
 from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+import re
+from django import forms
 # Create your views here.
 
 def index(request):
@@ -27,16 +32,22 @@ def blog(request):
     return render(request,'homepage/blog.html')
 
 def contact(request):
+    form = ContactForm()
     if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        message = request.POST['message']
-        obj=Contact()
-        obj.name=name
-        obj.email=email
-        obj.messages=message
-        obj.save()
-    return render(request,'homepage/contact.html')
+        form=ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['messages']
+            obj=Contact()
+            obj.name=name
+            obj.email=email
+            obj.messages=message
+            obj.save()
+            return render(request,'homepage/contact.html',{'message': 'Cảm ơn phản hồi của bạn'})
+            #messages.success(request,"Cảm ơn phản hồi của bạn"
+    context={'form' :form}
+    return render(request,'homepage/contact.html',context)
 
 def mylogin(request):
     return render(request,'homepage/login.html')
