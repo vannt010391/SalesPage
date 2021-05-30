@@ -1,7 +1,10 @@
+
 from django.core.checks import messages
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.db.models.query import FlatValuesListIterable
+from django.http import request
 
 # Create your models here.
 
@@ -155,17 +158,18 @@ class About(models.Model):
         managed = True
         db_table = 'About'
 STATUS_CONTACT = (
-    ('Wait', 'Chờ xử lý'),
+    ('WAIT', 'CHỜ XỬ LÝ'),
     ('SPAM', 'SPAM'),
     ('COMPLETED', 'HOÀN TẤT')
 )
 class Contact(models.Model):
     contactid = models.AutoField(primary_key=True)
-    email= models.EmailField(max_length=50,null=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    messages = models.TextField(blank=True, null=True)
+    email= models.EmailField(max_length=50,null=False)
+    name = models.CharField(max_length=100, blank=True, null=False)
+    messages = models.TextField(blank=True, null=False)
     status=models.CharField(choices=STATUS_CONTACT,default='Wait',max_length=50)
-    note = models.TextField(max_length=500, blank=True, null=True)
+    
+    
     
     class Meta:
         managed = True

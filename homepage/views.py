@@ -1,5 +1,9 @@
 from typing import Generic
+from django.http import response
+
+from django.http.response import HttpResponseRedirect
 import homepage
+from .forms import ContactForm
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import admin,messages
@@ -28,27 +32,22 @@ def blog(request):
     return render(request,'homepage/blog.html')
 
 def contact(request):
+    form = ContactForm()
     if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        message = request.POST['message']
-        if re.match(r'^\w+$', name):
-            if re.match('\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b', email):
-                obj=Contact()
-                obj.name=name
-                obj.email=email
-                obj.messages=message
-                obj.save()
-                messages.info(request,"cảm ơn phản hồi của bạn")
-            else:
-                print(1)
-                messages.info(request,"Email của bạn không hợp lệ")
-        else:
-            print(2)
-            messages.SUCCESS(request,"tên của bạn không hợp lệ")
-
-        
-    return render(request,'homepage/contact.html')
+        form=ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['messages']
+            obj=Contact()
+            obj.name=name
+            obj.email=email
+            obj.messages=message
+            obj.save()
+            return render(request,'homepage/contact.html',{'message': 'Cảm ơn phản hồi của bạn'})
+            #messages.success(request,"Cảm ơn phản hồi của bạn"
+    context={'form' :form}
+    return render(request,'homepage/contact.html',context)
 
 def mylogin(request):
     return render(request,'homepage/login.html')
