@@ -3,6 +3,16 @@
 {% load static %}
 
 {% block content %}
+<style>
+    * {
+  box-sizing: border-box;
+}
+h6 { 
+  display: block;
+   font-style: normal;
+   color:deeppink;
+}
+</style>
 <!-- Breadcrumb Section Begin -->
     <div class="breacrumb-section">
         <div class="container">
@@ -12,8 +22,56 @@
                         <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
                         <span>Blog</span>
                     </div>
+            <br class="jumbotron border shadow">
+                <div class="row">
+                    <div class="col-md-8 offset-2">
+                        <form >
+                            <div class="advanced-search">
+                                <div class="input-group">
+                                    <input name="q" type="text" placeholder="nhập từ khóa tìm kiếm" class="form-control" />
+                                    <div class="filter-catagories input-group-append">
+                                    <button class="btn btn-warning"> <i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+                
+                    <header class="header-section" style=" background-color: #f5ccd8; padding: 20px;"> <h3 style="font-size:large;text-align: center;"> Tin tức mới nhất </h3> </header>
+                    {% for Blog in page_obj %}
+                    <ul>
+                        <h6 class="card-header" > {{Blog.title}} </h6>
+                        <h4 > <i class="fa fa-calendar" style="font-size:24px"></i> Ngày đăng: {{Blog.createdate|date:"d-m-Y"}} </h4>
+                        <i class="fa fa-eye" style="font-size:20px"></i> Lượt xem: {{Blog.viewcount}}
+                        <div class="panel-footer">
+                            <br>
+                            <a href="/blog/{{Blog.blogid}}" class="btn btn-primary">  Xem chi tiết </a> 
+                        </div>  
+                        <hr style="border:lightslategrey;"> </hr>
+                    </ul>  
+                    {% endfor %}
+                
+            </div>            
+            
             </div>
+        </div>
+        <div class="pagination justify-content-center">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-info" href="?page=1" role="button">Trang Đầu</a>
+                    <!-- <a href="?page=1">&laquo; Trang Đầu </a> -->
+                    <a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}" role="button"> Trang Trước </a>
+                {% endif %}
+                <span class="btn btn-outline-danger" class="current" role="button">
+                    Trang {{ page_obj.number }} của {{ page_obj.paginator.num_pages }}
+                </span>
+        
+                {% if page_obj.has_next %}
+                    <a class="btn btn-secondary" href="?page={{ page_obj.next_page_number }}" role="button"> Trang Kế </a>
+                    <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}" role="button"> Trang Cuối  &raquo;</a>
+                {% endif %}
+            </span>
         </div>
     </div>
     <!-- Breadcrumb Section Begin -->
