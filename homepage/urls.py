@@ -14,6 +14,6 @@ urlpatterns = [
     path('reply',views.reply,name='reply'),
     path('results/',views.SearchView.as_view(), name='search'),
     path('blog', views.blog, name='blog'),
-    path('blog/<int:id>', views.post),
+    # path('blog/<int:id>', views.post),
     
 ]
