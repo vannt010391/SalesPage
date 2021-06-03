@@ -1,3 +1,4 @@
 django==3.0
 pillow
 django_ckeditor
+django-taggit

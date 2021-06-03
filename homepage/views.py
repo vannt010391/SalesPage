@@ -31,6 +31,8 @@ def about(request):
 def blog(request):
     return render(request,'homepage/blog.html')
 
+
+
 def contact(request):
     form = ContactForm()
     if request.method == 'POST':
