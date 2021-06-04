@@ -4,67 +4,141 @@
 
 {% block content %}
 
-<!-- Hero Section Begin -->
-<section class="hero-section">
-      
-    <div class="hero-items owl-carousel">
-        <div id="slider">
+<section id="slider"><!--slider-->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
+						
+			<div class="carousel-inner" role="listbox">
+    			{% for slide in slides %}
+    			{% if forloop.counter == 1 %}
+    				<div class="item active">
+    			{% else %}
+    				<div class="item">
+    			{% endif %}
+        				<img src="media/{{slide.image}}" alt="" width="640" height="360">
+    			</div>
+    			{% endfor %}
+    				</div>
 
-            <figure>
-                {% for slide in slides %}
-                <img src="media/{{slide.image}}" alt>
-                {% endfor %}
-            </figure>
+    <!-- Left and right controls -->
+				<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+					<i class="fa fa-angle-left"></i>
+				</a>
+				<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+					<i class="fa fa-angle-right"></i>
+				</a>
+			</div>
 
-        </div>
-    </div>
-    
-</section>
-<!-- Hero Section End -->
-
-<!-- Banner Section Begin -->
-<div class="banner-section spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="single-banner">
-                    <img src="{% static '/homepage/img/aothunnam1.jpg'%}">
-                    <div class="inner-text">
-                        <h4>Quần Áo</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="single-banner">
-                    <img src="{% static '/homepage/img/giay.jpg'%}" alt="">
-                    <div class="inner-text">
-                        <h4>Giày Dép</h4>
-                    </div>
-                </div>
-                
-            </div>
-            <div class="col-lg-4">
-                <div class="single-banner">
-                    <img src="{% static '/homepage/img/trangsuc.jpg'%}" alt="">
-                    <div class="inner-text">
-                        <h4>Trang Sức</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Banner Section End -->
-
-<!-- Quà Tặng Banner Section Begin -->
-<section class="women-banner spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="product-large set-bg" data-setbg="{% static '/homepage/img/aothunnam1.jpg'%}">
-                   
-                </div>
-            </div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section><!--/slider-->
+	
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-3">
+					<div class="left-sidebar">
+						<h2>DANH MỤC SẢN PHẨM</h2>
+						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Trang Sức
+										</a>
+									</h4>
+								</div>
+								<div id="sportswear" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li><a href="#">Nhẫn </a></li>
+											<li><a href="#">Vòng Tay </a></li>
+											<li><a href="#">Dây chuyền </a></li>
+											<li><a href="#">Combo</a></li>
+											
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Quần Áo
+										</a>
+									</h4>
+								</div>
+								<div id="mens" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li><a href="#">Quần</a></li>
+											<li><a href="#">Áo</a></li>
+											
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title">
+										<a data-toggle="collapse" data-parent="#accordian" href="#womens">
+											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
+											Giày Dép
+										</a>
+									</h4>
+								</div>
+								<div id="womens" class="panel-collapse collapse">
+									<div class="panel-body">
+										<ul>
+											<li><a href="#">Giày</a></li>
+											<li><a href="#">Dép</a></li>
+											
+										</ul>
+									</div>
+								</div>
+							</div>
+							
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h4 class="panel-title"><a href="#">Premium</a></h4>
+								</div>
+							</div>
+						</div><!--/category-products-->
+					
+						
+						
+						,
+					
+					</div>
+				</div>
+				
+				<div class="col-sm-9 padding-right">
+					
+					
+					<div class="category-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="#tshirt" data-toggle="tab">Quần Áo</a></li>
+								<li><a href="#blazers" data-toggle="tab">Giày Dép</a></li>
+								<li><a href="#sunglass" data-toggle="tab">Trang Sức</a></li>
+								
+							</ul>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade active in" id="tshirt" >
             <div class="col-lg-8 offset-lg-1">
                <div class="product-slider owl-carousel">
                     {% for product in products %} 
@@ -97,25 +171,18 @@
                     {% endfor %}
                </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- Quà Tặng Banner Section End -->
-
-
-<!-- Nội Thất Phong Thủy Banner Section Begin -->
-<section class="man-banner spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="product-slider owl-carousel">
-                    {% for product in products %}
-                        {% if product.productcategoryid.productcategoryname == 'Giày Dép' %}
-                        <div class="product-item">
+							</div>
+							
+							<div class="tab-pane fade" id="blazers" >
+								<div class="col-lg-8 offset-lg-1">
+                				<div class="product-slider owl-carousel">
+                   					 {% for product in products %}
+                        			{% if product.productcategoryid.productcategoryname == 'Giày Dép' %}
+                       			 <div class="product-item">
                             
-                            <div class="pi-pic">
+                            	<div class="pi-pic">
                                 <img src="media\{{product.productimage}}" alt="">
-                            <div class="icon">
+                            	<div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
                                 <ul>
@@ -138,49 +205,31 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col-lg-3 offset-lg-1">
-                <div class="product-large set-bg m-large" data-setbg="{% static '/homepage/img/giay.jpg'%}">
-                   
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- Nội Thất Phong Thủy Banner Section End -->
-
-
-<!--Thờ cúng Banner Section Begin -->
-<section class="women-banner spad">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="product-large set-bg" data-setbg="{% static '/homepage/img/trangsuc.jpg'%}">
-                    
-                </div>
-            </div>
-            <div class="col-lg-8 offset-lg-1">
-               <div class="product-slider owl-carousel">
-                    {% for product in products %}
+							</div>
+							
+							<div class="tab-pane fade" id="sunglass" >
+ 			<div class="col-lg-8 offset-lg-1">
+            <div class="product-slider owl-carousel">
+                    	{% for product in products %}
                         {% if product.productcategoryid.productcategoryname == 'Trang Sức' %}   
-                        <div class="product-item">
-                        <div class="pi-pic">
-                                <img src="media\{{product.productimage}}" alt="">
+            <div class="product-item">
+            <div class="pi-pic">
+                <img src="media\{{product.productimage}}" alt="">
                                 
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
-                                    
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">{{product.productcategoryid}}</div>
-                                <a href="#">
-                                    <h5>{{product.productname}}</h5>
-                                </a>
-                                <div class="product-price">
+                    <div class="icon">
+                        <i class="icon_heart_alt"></i>
+                	</div>
+                        <ul>
+                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                            <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                        </ul>
+                    </div>
+                    <div class="pi-text">
+                    <div class="catagory-name">{{product.productcategoryid}}</div>
+                        <a href="#">
+                            <h5>{{product.productname}}</h5>
+                        </a>
+                    <div class="product-price">
                                     Liên Hệ
                             </div>
                             </div>
@@ -191,10 +240,165 @@
                     {% endfor %}
                </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- Thờ cúng Banner Section End -->
+							</div>
+							<div class="tab-pane fade" id="poloshirt" >
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="images/home/gallery2.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="images/home/gallery4.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="images/home/gallery3.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="product-image-wrapper">
+										<div class="single-products">
+											<div class="productinfo text-center">
+												<img src="images/home/gallery1.jpg" alt="" />
+												<h2>$56</h2>
+												<p>Easy Polo Black Edition</p>
+												<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+											</div>
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div><!--/category-tab-->
+					
+					<div class="recommended_items"><!--recommended_items-->
+						<h2 class="title text-center">Sản Phẩm Bán Chạy</h2>
+						
+						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="item active">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="item">	
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend1.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend2.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-4">
+										<div class="product-image-wrapper">
+											<div class="single-products">
+												<div class="productinfo text-center">
+													<img src="images/home/recommend3.jpg" alt="" />
+													<h2>$56</h2>
+													<p>Easy Polo Black Edition</p>
+													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+												</div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+								<i class="fa fa-angle-left"></i>
+							  </a>
+							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							  </a>			
+						</div>
+					</div><!--/recommended_items-->
+					
+				</div>
+			</div>
+		</div>
+	</section>
 
 <!-- Deal Of The Week Section Begin-->
 <section class="deal-of-week set-bg spad" data-setbg="{% static '/homepage/img/nen7.jpg' alt='' %}">
