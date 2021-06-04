@@ -23,8 +23,10 @@
     <link rel="stylesheet" href="{% static 'homepage/css/slicknav.min.css' %}">
     <link rel="stylesheet" href="{% static 'homepage/css/style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>     
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js"></script>      
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css" rel="stylesheet" type="text/css"/>  
     
 </head>
 
@@ -206,7 +208,7 @@
                     <ul>
                         <li><a href="{% url 'index' %}">Trang chủ</a></li>
                         
-                        <li><a href="{% url 'homepage:product' %}">Sản Phẩm</a>
+                        <li><a href="{% url 'homepage:product'%}">Sản Phẩm</a>
                             <!-- <ul class="dropdown">
                                 <li><a href="#">Quà Tặng</a></li>
                                 <li><a href="#">Nội Thất Phong Thuỷ</a></li>

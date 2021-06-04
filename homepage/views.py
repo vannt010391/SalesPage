@@ -5,7 +5,7 @@ from collections import Counter
 from django.http.response import HttpResponseRedirect
 import homepage
 from .forms import ContactForm
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib import admin,messages
 from django.urls import path, include
@@ -18,7 +18,13 @@ from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
 from django import forms
+<<<<<<< HEAD
 from django.utils import timezone
+=======
+from django.template.loader import render_to_string
+from django.http import JsonResponse
+
+>>>>>>> f290c5e (fix: cập nhật trang product và premium)
 # Create your views here.
 
 def index(request):
@@ -32,8 +38,6 @@ def about(request):
 
 def blog(request):
     return render(request,'homepage/blog.html')
-
-
 
 def contact(request):
     form = ContactForm()
@@ -84,50 +88,68 @@ def register(request):
 #     return render(request,'homepage/premium.html')
 
 def product(request):
-    productcategory_list = ProductCategory.objects.all()
-    product_list = Product.objects.all()
+    productcategory_list = ProductCategory.objects.filter(isenable__exact=True)
 
-    # Paging
-    paginator = Paginator(product_list, 20)
-    page = request.GET.get('page', 1)
-    try:
-        products = paginator.page(page)
-    except PageNotAnInteger:
-        products = paginator.page(1)
-    except EmptyPage:
-        products = paginator.page(paginator.num_pages)
+    url_parameter = request.GET.get("search")
+    if url_parameter:
+        products = Product.objects.filter(productname__icontains=url_parameter)
+    else:
+        products = Product.objects.all()
+
+    paginator = Paginator(products, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)  
 
     context = {
         'productcategory_list': productcategory_list,
-        "page_obj": products
+        'products': products,
+        'page_obj': page_obj,
+    }
+
+    return render(request,'homepage/product.html', context)
+
+def productcategory(request, categoryid):
+    productcategory_list = ProductCategory.objects.filter(isenable__exact=True)
+    category = ProductCategory.objects.get(productcategoryid=categoryid).productcategoryname
+    products = Product.objects.filter(productcategoryid=categoryid)
+    url_parameter = request.GET.get("search")
+    if url_parameter:
+        products = Product.objects.filter(productname__icontains=url_parameter)
+    paginator = Paginator(products, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)  
+
+    context = {
+        'productcategory_list': productcategory_list,
+        'category': category,
+        'products': products,
+        'page_obj': page_obj,
     }
     return render(request,'homepage/product.html', context)
+
 # Chị Vân demo
 def premium(request):
     products = Product.objects.filter(productcategoryid=4)
+    url_parameter = request.GET.get("search")
+    if url_parameter:
+        products = products.filter(productname__icontains=url_parameter)    
     paginator = Paginator(products, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request,'homepage/premium.html',{'products':products, 'page_obj': page_obj})
+    context = {
+        'products': products,
+        'page_obj': page_obj,
+    }
+    return render(request,'homepage/premium.html', context)
 
-class ProductDetail(generic.DetailView):
-    model = Product
-    template_name = 'homepage/productdetail.html'
-
-class SearchView(generic.ListView):
-    model = Product
-    template_name = 'homepage/product.html'
-    context_object_name = 'all_search_results'
-
-    def get_queryset(self):
-       result = super(SearchView, self).get_queryset()
-       query = self.request.GET.get('search')
-       if query:
-          postresult = Product.objects.filter(productname__contains=query)
-          result = postresult
-       else:
-           result = None
-       return result
+def productdetail (request, id):
+    product = Product.objects.get(productid=id)
+    relatedproducts = Product.objects.filter(productcategoryid=product.productcategoryid)
+    context = {
+        'product': product,
+        'relatedproducts': relatedproducts,
+    }
+    return render(request, 'homepage/productdetail.html', context)
 
 def reply(request):
     return render(request,'homepage/reply.html')

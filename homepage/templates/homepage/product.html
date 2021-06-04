@@ -24,92 +24,102 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
-                    <form method="GET" action="{% url 'homepage:search' %}" >
+                   
+                    <form autocomplete="on" action="">
                     <div class="advanced-search">
-                        <h4 class="fw-title text-inner font-weight-bold" style="color: crimson;">Tìm kiếm sản phẩm</h4>
+                        <h4 class="fw-title inner-header font-weight-bold" style="color: crimson;">Tìm kiếm sản phẩm</h4>
                         <p></p>
                         <div class="filter-catagories input-group-prepend">
-                            <input type="text" placeholder="Nhập từ khóa" name="search">
+                            <input type="text" placeholder="Nhập từ khóa" name="search" id="search">
                             <button type="submit" class="btn btn-warning"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
+
+                    <script>
+                        $( function() {
+                          /*
+                            var availableTags = [
+                                {% for product in products %}
+                                    "{{product.productname}}",
+                                {% endfor %}
+                            ];
+                          */
+                            var availableTags = [
+                                "Đầm Thêu",
+                                "Giày cao gót",
+                                "Bông tai ngọc trai",
+                                "Ngọc Trai",
+                            ];
+                            $( "#search" ).autocomplete({
+                                source: availableTags
+                            });
+                        } );
+                        </script>
+
                     </form>
                     <div><p></p></div>
                     <div class="filter-widget">
-                        <h4 class="fw-title text-inner font-weight-bold" style="color: crimson;">Danh Mục Sản Phẩm</h4>
-                        {% for product_category in productcategory_list %}
-                        <ul class="filter-catagories">
-                            <li><a href="#">{{product_category.productcategoryname}}</a></li>
-                        </ul>
-                        {% endfor %}
+                        <h4 class="fw-title inner-header font-weight-bold m-0" style="color: crimson;">Danh Mục Sản Phẩm</h4>
+                        <div class="filter-catagories list-group list-group-flush">
+                            <a class="list-group-item list-group-item-action pl-0" href="{% url 'homepage:product' %}">All</a>
+                            {% for type in productcategory_list %}
+                                <a class="list-group-item list-group-item-action pl-0" href="{% url 'homepage:productcategory' type.productcategoryid %}">
+                                    {{type.productcategoryname}}
+                                </a>
+                            {% endfor %}  
+                        </div>
                     </div>
-            </div>
+                </div>
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="product-list">
                         <div class="row">
-                            
-                            <div class="col-lg-6 col-sm-6">
-                                {% for product in all_search_results %}
+                            {% if page_obj %}
+                            {% for product in page_obj %}
+                            <div class="col-lg-4 col-sm-4">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="../../../media/{{product.productimage}}" alt="{{product.productimage}}">
+                                        <img src="../../../media/{{product.productimage}}">
                                         <div class="sale pp-sale"></div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="{% url 'homepage:productdetail' product.productid %}">+ Quick View</a></li>
+                                            <li class="quick-view"><a href="../../../media/{{product.productimage}}">+ Quick View</a></li>
                                         </ul>
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name"></div>
-                                        <a href="#">
-                                            <h5></h5>
+                                        <div class="catagory-name">{{product.productcategoryid}}</div>
+                                        <a href="{% url 'homepage:productdetail' product.productid %}">
+                                            <h5>{{product.productname}}</h5>
                                         </a>
                                         <div class="product-price">
-                                            Liên Hệ                                       
+                                            {% if product.price %}
+                                                {{product.price}}
+                                            {% else %}
+                                                Liên Hệ
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
-                                {% empty %}
-                                {% endfor %}                        
-                                {% for product in page_obj %}
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="media/{{product.productimage}}" alt="{{product.productimage}}">
-                                        <div class="sale pp-sale"></div>
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="{% url 'homepage:productdetail' product.productid %}">+ Quick View</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name"></div>
-                                        <a href="#">
-                                            <h5></h5>
-                                        </a>
-                                        <div class="product-price">
-                                            Liên Hệ                                       
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-                            
+                            </div>                              
+                            {% endfor %}
+                            {% else %}                            
+                                <p>No products found in {% if category %}{{category}}{% else %}all{% endif %}.
+                                    <a href="{% url 'homepage:product' %}">Wanna see all products?</a> 
+                                </p>                                
+                            {% endif %}
                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        {% if page_obj %}
         <div class="pagination justify-content-center">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a class="btn btn-info" href="?page=1" role="button">Trang Đầu</a>
-                    
+                    <a class="btn btn-info" href="?page=1" role="button">Trang Đầu</a>               
                     <a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}" role="button"> Trang Trước </a>
                 {% endif %}
                 <span class="btn btn-outline-danger" class="current">
@@ -122,6 +132,7 @@
                 {% endif %}
             </span>
         </div>
+        {% endif %}
     </section>
     <!-- Product Shop Section End -->
 
