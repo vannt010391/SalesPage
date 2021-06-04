@@ -36,4 +36,27 @@ class OrderItemAdmin(admin.ModelAdmin):
 # admin.site.register(Contact)
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
+<<<<<<< HEAD
     list_display = ("contactid","email", "name", "messages","status","date",)
+=======
+    list_display = ("contactid","email", "name", "messages","status")
+
+# admin.site.register(BlogCategory)
+@admin.register(BlogCategory)
+class BlogCategoryAdmin(admin.ModelAdmin):
+    list_display = ("blogcategoryid", "parentid", "displayorder", "name", "createdate", "metaKeywords")
+
+# admin.site.register(Blog)
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ("blogcategoryid", "blogid", "title" ,"blogimage", "metaKeywords", "tagid")  
+
+class MyModelAdmin(admin.ModelAdmin):
+    list_display = ['tag_list']
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('tags')
+
+    def tag_list(self, obj):
+        return u", ".join(o.name for o in obj.tags.all())
+>>>>>>> 1f050f7... fix: bổ sung thêm trang blog

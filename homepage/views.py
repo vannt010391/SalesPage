@@ -19,12 +19,17 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
 from django import forms
 <<<<<<< HEAD
+<<<<<<< HEAD
 from django.utils import timezone
 =======
 from django.template.loader import render_to_string
 from django.http import JsonResponse
 
 >>>>>>> f290c5e (fix: cập nhật trang product và premium)
+=======
+
+
+>>>>>>> 1f050f7... fix: bổ sung thêm trang blog
 # Create your views here.
 
 def index(request):
@@ -37,8 +42,48 @@ def about(request):
     return render(request,'homepage/about.html')
 
 def blog(request):
-    return render(request,'homepage/blog.html')
+    blogcategorylist = BlogCategory.objects.all() 
+    blogs = Blog.objects.all()
+    if 'q' in request.GET:
+        q=request.GET['q']
+        posts=Blog.objects.filter(metaKeywords__icontains=q)
+    else:
+        posts=Blog.objects.all().order_by("-createdate")
+    # Pagintion
+    paginator=Paginator(posts,6)
+    page_number=request.GET.get('page')
+    page_obj=paginator.get_page(page_number)
+    context = {
+        'blogcategorylist': blogcategorylist,
+        'page_obj':page_obj,
+        'blogs' : blogs,
+        
+    }
+    return render(request,'homepage/blog.html', context)
 
+<<<<<<< HEAD
+=======
+def blogcategory(request, id):
+    blogcategorylist = BlogCategory.objects.all() 
+    blogs = Blog.objects.filter(blogcategoryid=id)
+    context = {
+        'blogcategorylist': blogcategorylist,
+        'page_obj' : blogs,
+    }
+    return render(request, 'homepage/blog.html', context)
+
+
+def post(request,id):
+    post = Blog.objects.get(blogid = id)
+    blogs = post.blogcategoryid
+    relateblog = Blog.objects.filter(blogcategoryid=blogs)
+    context =  {
+        'post' : post,
+        'relateblog' : relateblog,
+    }
+    return render(request, 'homepage/post.html', context)
+    
+>>>>>>> 1f050f7... fix: bổ sung thêm trang blog
 def contact(request):
     form = ContactForm()
     if request.method == 'POST':
