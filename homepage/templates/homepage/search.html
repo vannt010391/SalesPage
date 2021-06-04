@@ -1,0 +1,45 @@
+{% extends "homepage/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<section class="women-banner spad">
+    <div class="container-fluid"><span class="text-muted">Search result for</span> {{ request.GET.q }}
+        <div class="row">
+                           {% for product in products %} 
+            <div class="col-lg-8 offset-lg-1">
+               <div class="product-slider owl-carousel">
+ 
+                        
+                        <div class="product-item">
+                        <div class="pi-pic">
+                                <img src="media\{{product.productimage}}" alt="">
+                                
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="zoom"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                                    
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{product.productcategoryid}}</div>
+                                <a href="#">
+                                    <h5>{{product.productname}}</h5>
+                                </a>
+                                <div class="product-price">
+                                    Liên Hệ
+                            </div>
+                            </div>
+                        </div>
+                     
+                    {% endfor %}
+               </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

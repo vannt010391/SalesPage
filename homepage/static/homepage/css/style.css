@@ -4342,6 +4342,8 @@ ol {
   padding: 2%;
 }
 h2 {
+	top: 20px;
+
   text-align: center;
 }
 /* Slideshow container */

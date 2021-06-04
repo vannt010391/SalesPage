@@ -57,6 +57,11 @@ def mylogin(request):
 def register(request):
     return render(request,'homepage/register.html')
 
+def checkout(request):
+    return render(request,'homepage/checkout.html')
+
+def mycart(request):
+    return render(request,'homepage/cart.html')
 # def premium(request):
 #     productcategory_list = ProductCategory.objects.all()
 #     # Paging
@@ -123,6 +128,9 @@ class SearchView(generic.ListView):
 def reply(request):
     return render(request,'homepage/reply.html')
 
-    
+def search(request):
+    q=request.GET['q']
+    data=Product.objects.filter(productname=q).order_by('id')
+    return render(request, 'homepage/search.html', {'data':data }) 
 
 

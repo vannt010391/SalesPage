@@ -22,6 +22,13 @@
     <link rel="stylesheet" href="{% static 'homepage/css/jquery-ui.min.css' %}">
     <link rel="stylesheet" href="{% static 'homepage/css/slicknav.min.css' %}">
     <link rel="stylesheet" href="{% static 'homepage/css/style.css' %}">
+    <link href="{% static 'homepage/css/bootstrap.min copy.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/css/font-awesome.min copy.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/css/price-range.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/css/animate.css' %}" rel="stylesheet">
+	<link href="{% static 'homepage/css/main.css' %}" rel="stylesheet">
+	<link href="{% static 'homepage/css/responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     
@@ -47,9 +54,14 @@
                 <div class="ht-right">
                     <a href="{% url 'homepage:register' %}" class="login-panel"><i class="fa fa-user"></i>Đăng Ký</a> 
                     <a href="{% url 'homepage:login' %}" class="login-panel"><i class="fa fa-user"></i>Đăng Nhập</a>
+                    <a href="{% url 'homepage:checkout' %}" class="login-panel"><i class="fa fa-crosshairs"></i> Checkout</a>
+                    <a href="{% url 'homepage:cart' %}" class="login-panel"><i class="fa fa-shopping-cart"></i> Cart</a>
                     <div class="top-social">
-                        <a href="#"><i class="ti-facebook"></i></a>
-                        <a href="#"><i class="fa fa-envelope"></i></a>
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-google-plus"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-dribbble"></i></a>
                     </div>
                 </div>
                 
@@ -69,139 +81,20 @@
                         </div>
                     </div>
                    <div class="header-bottom-right">
-         <div class="search">
-				<input type="text" name="s" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-				<input type="submit" value="Subscribe" id="submit" name="submit">
-				<div id="response"> </div>
-		 </div>
-	  <div class="tag-list">
-	    <ul class="icon1 sub-icon1 profile_img">
-			<li><a class="active-icon c1" href="#"> </a>
-				<ul class="sub-icon1 list">
-					<li><h3>Mã Khuyến Mãi</h3><a href=""></a></li>
-					<li><p>Không có mã khuyến mãi  <a href="">Săn mã khuyến mãi ngay bây giờ</a></p></li>
-				</ul>
-			</li>
-		</ul>
-		<ul class="icon1 sub-icon1 profile_img">
-			<li><a class="active-icon c2" href="#"> </a>
-				<ul class="sub-icon1 list">
-					<li><h3>Giỏ hàng</h3><a href=""></a></li>
-					<li><p>Giỏ hàng của bạn hiện đang trống  <a href="">Mua hàng ngay bây giờ</a></p></li>
-				</ul>
-			</li>
-		</ul>
-
-	  </div>
+    <form class="form-inline my-2 my-lg-0" action="/search">
+ <div class="input-group">
+  <input name="q" type="text" class="form-control" placeholder="SEARCH..."/>
+  <div class="input-group-append">
+    <button class="btn btn-dark" type="submit" id="button-addon2">Search</button>
+  </div>
+</div>
+    </form>
     </div>
-                    <div class="col-lg-2 text-right col-md-2">
-                        <ul class="nav-right">
-                            <li class="heart-icon">
-                                <a href="#">
-                                    <i class="icon_heart_alt"></i>
-                                    <span></span>
-                                </a>
-                            </li>
-                            <li class="cart-icon">
-                                <a href="#">
-                                    <i class="icon_bag_alt"></i>
-                                    <span></span>
-                                </a>
-                                <div class="cart-hover">
-                                    <div class="select-items">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="si-pic"><img src="" alt=""></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p></p>
-                                                            <h6></h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="si-pic"><img src="" alt=""></td>
-                                                    <td class="si-text">
-                                                        <div class="product-selected">
-                                                            <p></p>
-                                                            <h6></h6>
-                                                        </div>
-                                                    </td>
-                                                    <td class="si-close">
-                                                        <i class="ti-close"></i>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="select-total">
-                                        <span></span>
-                                        <h5></h5>
-                                    </div>
-                                    <div class="select-button">
-                                        <a href="#" class="primary-btn view-card">Xem Giỏ Hàng</a>
-                                        <a href="#" class="primary-btn checkout-btn">Thanh Toán</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="cart-price"></li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
         <div class="nav-item">
             <div class="container">
-                <div class="nav-depart">
-                    <div class="depart-btn">
-                        <i class="ti-menu"></i>
-                        <span>Danh mục</span>
-                        <ul class="depart-hover">
-                       <li class="active grid">
-
-				<div class="megapanel">
-					<div class="row">
-						<div class="col1">
-							<div class="h_nav">
-								<h4>Quần Áo</h4>
-								<ul>
-									<li><a href="product.html">Quần</a></li>
-									<li><a href="product.html">Áo</a></li>
-								</ul>
-							</div>
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>Giầy Dép</h4>
-								<ul>
-									<li><a href="product.html">Giày</a></li>
-									<li><a href="product.html">Dép</li>
-
-								</ul>
-							</div>
-						</div>
-						<div class="col1">
-							<div class="h_nav">
-								<h4>Trang Sức</h4>
-								<ul>
-									<li><a href="product.html">Nhẫn</a></li>
-									<li><a href="product.html">Vòng tay</a></li>
-									<li><a href="product.html">Dây chuyển</a></li>
-									<li><a href="product.html">COMBO</a></li>
-								</ul>
-							</div>
-						</div>
-					  </div>
-					</div>
-				</li>
-
-                        </ul>
-                    </div>
-                </div>
                 <nav class="nav-menu mobile-menu">
                     <ul>
                         <li><a href="{% url 'index' %}">Trang chủ</a></li>
@@ -339,6 +232,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script><i cla
     <script src="{% static 'homepage/js/jquery.slicknav.js' %}"></script>
     <script src="{% static 'homepage/js/owl.carousel.min.js' %}"></script>
     <script src="{% static 'homepage/js/main.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.js' %}"></script>
+	<script src="{% static 'homepage/js/bootstrap.min copy.js' %}"></script>
+	<script src="{% static 'homepage/js/jquery.scrollUp.min.js' %}"></script>
+	<script src="{% static 'homepage/js/price-range.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'homepage/js/main.js' %}"></script>
+    <script src="{% static 'homepage/js/main copy.js' %}"></script>
 </body>
 
 </html>
