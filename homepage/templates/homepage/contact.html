@@ -52,8 +52,8 @@
                         <form action='#' class="comment-form" method="POST">
                             {% csrf_token %}
                             {{ form }}
+                            <input type="submit" value="send message">
                             <p>{{message}}</p>
-                            <input type="submit" value="send message"> 
                         </form>
                         
                     </div>
