@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.query import FlatValuesListIterable
 from django.http import request
-
+from django.utils import timezone
 # Create your models here.
 
 
@@ -167,10 +167,8 @@ class Contact(models.Model):
     email= models.EmailField(max_length=50,null=False)
     name = models.CharField(max_length=100, blank=True, null=False)
     messages = models.TextField(blank=True, null=False)
-    status=models.CharField(choices=STATUS_CONTACT,default='Wait',max_length=50)
-    
-    
-    
+    status=models.CharField(choices=STATUS_CONTACT,default='WAIT',max_length=50)
+    date = models.DateField()  
     class Meta:
         managed = True
         db_table = 'Contact'

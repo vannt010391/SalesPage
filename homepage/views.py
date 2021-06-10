@@ -1,6 +1,7 @@
 from typing import Generic
+from django.core.exceptions import ValidationError
 from django.http import response
-
+from collections import Counter
 from django.http.response import HttpResponseRedirect
 import homepage
 from .forms import ContactForm
@@ -17,6 +18,7 @@ from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
 from django import forms
+from django.utils import timezone
 # Create your views here.
 
 def index(request):
@@ -41,21 +43,28 @@ def contact(request):
             name = form.cleaned_data['name']
             email = form.cleaned_data['email']
             message = form.cleaned_data['messages']
+            date = timezone.now()
             obj=Contact()
+            obj.date=date
             obj.name=name
             obj.email=email
             obj.messages=message
             obj.save()
-            return render(request,'homepage/contact.html',{'message': 'Cảm ơn phản hồi của bạn'})
+            contact ={'message': 'Cảm ơn phản hồi của bạn'}
+            return render(request,'homepage/feedback.html',contact)
             #messages.success(request,"Cảm ơn phản hồi của bạn"
     context={'form' :form}
     return render(request,'homepage/contact.html',context)
+
+def feedback(request):
+    return render(request,'homepage/feedback.html',contact)
 
 def mylogin(request):
     return render(request,'homepage/login.html')
 
 def register(request):
     return render(request,'homepage/register.html')
+
 
 # def premium(request):
 #     productcategory_list = ProductCategory.objects.all()
@@ -122,6 +131,9 @@ class SearchView(generic.ListView):
 
 def reply(request):
     return render(request,'homepage/reply.html')
+
+def new_func(email):
+    print(email)
 
     
 

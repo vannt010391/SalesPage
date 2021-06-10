@@ -3,18 +3,7 @@
 {% load static %}
 
 {% block content %}
-<style>
-.button {
-    color: black;
-    width:100%;
-    border-radius: 8px;
-    font-size: 16px;
-}
-.button:hover{
-    background-color:  LightSalmon;
-    color: white;
-}
-</style>
+
 <!-- Contact Section Begin -->
 <section class="contact-section spad" >
     <div class="container">
@@ -60,11 +49,11 @@
                     <div class="leave-comment">
                         <h4>Để lại lời nhắn</h4>
                         <p>Chúng tôi sẽ liên hệ với bạn trong 24 giờ.</p>
-                        <form action="" class="comment-form" method="POST">
+                        <form action="{% url 'homepage:contact' %}" class="comment-form" method="POST">
                             {% csrf_token %}
-                            {{ form }}
-                            <button class="button">send message </button>
-                        </form> 
+                            {{ message }}
+                            <input type="submit" value="Quay lại">
+                        </form>
                         
                     </div>
                 </div>
