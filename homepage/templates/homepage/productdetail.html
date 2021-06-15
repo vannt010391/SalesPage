@@ -61,7 +61,13 @@
                             </div>
                             <div class="pd-desc">
                                 <p>Nội dung: {{product.descriptions}}</p>
-                                <h4>Price: {{product.price}}</h4>
+                                <h4>Price: 
+                                    {% if product.price %}
+                                        {{product.price}}
+                                    {% else %}
+                                        Liên Hệ
+                                    {% endif %}
+                                </h4>
                             </div>
                             <div class="pd-color">
                                 <h6>Size: {{product.size}}</h6>
@@ -103,6 +109,37 @@
             </div>
         </div>
         <div class="row">
+            {% for product in relatedproducts %}
+            <div class="col-lg-3 col-sm-4">
+                <div class="product-item">
+                    <div class="pi-pic">
+                        <img src="../../../media/{{product.productimage}}" alt="">
+                        <div class="sale pp-sale"></div>
+                        <div class="icon">
+                            <i class="icon_heart_alt"></i>
+                        </div>
+                        <ul>
+                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+                            <li class="quick-view"><a href="media\{{product.productimage}}">+ Quick View</a></li>
+                        </ul>
+                    </div>
+                    <div class="pi-text">
+                        <div class="catagory-name">{{product.productcategoryid}}</div>
+                        <a href="#">
+                            <h5>{{product.productname}}</h5>
+                        </a>
+                        <div class="product-price">
+                            {% if product.price %}
+                                {{product.price}}
+                            {% else %}
+                                Liên Hệ
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+<!--
             <div class="col-lg-4 col-sm-6">
                 <div class="product-item">
                     <div class="pi-pic">
@@ -127,7 +164,8 @@
                         </div>
                     </div>
                 </div>
-            </div>            
+            </div>    
+            -->        
         </div>
     </div>
 </div>
