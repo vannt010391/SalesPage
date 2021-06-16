@@ -5,11 +5,9 @@ from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.query import FlatValuesListIterable
 from django.http import request
-<<<<<<< HEAD
 from django.utils import timezone
-=======
 from taggit.managers import TaggableManager
->>>>>>> 1f050f7... fix: bổ sung thêm trang blog
+
 # Create your models here.
 
 
@@ -116,6 +114,7 @@ class Blog(models.Model):
     viewcount = models.IntegerField(blank=True, null=True)
     tagid = models.CharField(max_length=50, blank=True, null=True)
     tags = TaggableManager()
+
     def __str__(self):
         return self.title
     class Meta:
@@ -162,6 +161,7 @@ class About(models.Model):
     class Meta:
         managed = True
         db_table = 'About'
+        
 STATUS_CONTACT = (
     ('WAIT', 'CHỜ XỬ LÝ'),
     ('SPAM', 'SPAM'),

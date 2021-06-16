@@ -36,10 +36,8 @@ class OrderItemAdmin(admin.ModelAdmin):
 # admin.site.register(Contact)
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-<<<<<<< HEAD
     list_display = ("contactid","email", "name", "messages","status","date",)
-=======
-    list_display = ("contactid","email", "name", "messages","status")
+
 
 # admin.site.register(BlogCategory)
 @admin.register(BlogCategory)
@@ -59,4 +57,4 @@ class MyModelAdmin(admin.ModelAdmin):
 
     def tag_list(self, obj):
         return u", ".join(o.name for o in obj.tags.all())
->>>>>>> 1f050f7... fix: bổ sung thêm trang blog
+

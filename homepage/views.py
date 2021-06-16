@@ -18,19 +18,7 @@ from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
 from django import forms
-<<<<<<< HEAD
-<<<<<<< HEAD
-from django.utils import timezone
-=======
-from django.template.loader import render_to_string
-from django.http import JsonResponse
 
->>>>>>> f290c5e (fix: cập nhật trang product và premium)
-=======
-
-
->>>>>>> 1f050f7... fix: bổ sung thêm trang blog
-# Create your views here.
 
 def index(request):
     products = Product.objects.all()
@@ -61,8 +49,7 @@ def blog(request):
     }
     return render(request,'homepage/blog.html', context)
 
-<<<<<<< HEAD
-=======
+
 def blogcategory(request, id):
     blogcategorylist = BlogCategory.objects.all() 
     blogs = Blog.objects.filter(blogcategoryid=id)
@@ -83,7 +70,7 @@ def post(request,id):
     }
     return render(request, 'homepage/post.html', context)
     
->>>>>>> 1f050f7... fix: bổ sung thêm trang blog
+
 def contact(request):
     form = ContactForm()
     if request.method == 'POST':

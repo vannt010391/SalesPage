@@ -14,13 +14,10 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('reply',views.reply,name='reply'),
     path('blog', views.blog, name='blog'),
-<<<<<<< HEAD
-    path('feedback',views.feedback, name= 'feedback')
-    # path('blog/<int:id>', views.post),
 
-=======
+    path('feedback',views.feedback, name= 'feedback'),    
     path('blog/<int:id>', views.post),
     path('blogcategory/<int:id>', views.blogcategory, name='blogcategory'),
     
->>>>>>> 1f050f7... fix: bổ sung thêm trang blog
+
 ]
