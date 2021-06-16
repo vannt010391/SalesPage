@@ -141,3 +141,4 @@ CKEDITOR_CONFIGS = {
         'width': 900,
     },
 }
+TAGGIT_CASE_INSENSITIVE = True

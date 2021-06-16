@@ -18,61 +18,226 @@ h6 {
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
-                        <span>Blog</span>
-                    </div>
-            <br class="jumbotron border shadow">
-                <div class="row">
-                    <div class="col-md-8 offset-2">
-                        <form >
-                            <div class="advanced-search">
-                                <div class="input-group">
-                                    <input name="q" type="text" placeholder="nhập từ khóa tìm kiếm" class="form-control" />
-                                    <div class="filter-catagories input-group-append">
-                                    <button class="btn btn-warning"> <i class="fa fa-search"></i></button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="breadcrumb-text">
+                            <a href="{% url 'index' %}"><i class="fa fa-home"></i> Home</a>
+                            <span>Blog</span>
+                        </div>
                 </div>
-                
-                    <header class="header-section" style=" background-color: #f5ccd8; padding: 20px;"> <h3 style="font-size:large;text-align: center;"> Tin tức mới nhất </h3> </header>
-                    {% for Blog in page_obj %}
-                    <ul>
-                        <h6 class="card-header" > {{Blog.title}} </h6>
-                        <h4 > <i class="fa fa-calendar" style="font-size:24px"></i> Ngày đăng: {{Blog.createdate|date:"d-m-Y"}} </h4>
-                        <i class="fa fa-eye" style="font-size:20px"></i> Lượt xem: {{Blog.viewcount}}
-                        <div class="panel-footer">
-                            <br>
-                            <a href="/blog/{{Blog.blogid}}" class="btn btn-primary">  Xem chi tiết </a> 
-                        </div>  
-                        <hr style="border:lightslategrey;"> </hr>
-                    </ul>  
-                    {% endfor %}
-                
-            </div>            
-            
             </div>
         </div>
-        <div class="pagination justify-content-center">
-            <span class="step-links">
-                {% if page_obj.has_previous %}
-                    <a class="btn btn-info" href="?page=1" role="button">Trang Đầu</a>
-                    <!-- <a href="?page=1">&laquo; Trang Đầu </a> -->
-                    <a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}" role="button"> Trang Trước </a>
-                {% endif %}
-                <span class="btn btn-outline-danger" class="current" role="button">
-                    Trang {{ page_obj.number }} của {{ page_obj.paginator.num_pages }}
-                </span>
-        
-                {% if page_obj.has_next %}
-                    <a class="btn btn-secondary" href="?page={{ page_obj.next_page_number }}" role="button"> Trang Kế </a>
-                    <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}" role="button"> Trang Cuối  &raquo;</a>
-                {% endif %}
-            </span>
+    </div>                 
+               
+     
+    <section class="blog-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
+                    <div class="blog-sidebar">
+                        
+                            <form >
+                                <div class="advanced-search">
+                                    <div class="input-group">
+                                        <input name="q" type="search" placeholder="nhập từ khóa tìm kiếm" class="form-control" />
+                                        <div class="filter-catagories input-group-append">
+                                        <button class="btn btn-warning"> <i class="fa fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                 </div>
+                            </form> 
+                        <br>
+                        <div class="blog-catagory">
+                            <h4>Danh mục thể loại</h4>
+                            <ul class="filter-catagories">
+                                <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                                    <div class="panel panel-default">
+                                        {% for type in blogcategorylist %}
+                                        <div class="panel-heading">
+                                            
+                                            <h4 class="panel-title">
+                                                {% if type.blogcategoryid == 1 %}
+                                                <a data-toggle="collapse" data-parent="#accordian" href="#clothes">
+                                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                    <h3 style="color: rgb(170, 105, 6);"> {{type.name}} </h3>
+                                                </a>
+                                                {% endif%}
+                                            </h4>
+                                        </div>
+                                        {% if type.displayorder == 1 %}
+                                        <div id="clothes" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="{% url 'homepage:blogcategory' type.blogcategoryid %}"> {{type.name}} </a></li>
+                                                   
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="panel panel-default">
+                                        {% for type in blogcategorylist %}
+                                        <div class="panel-heading">
+                                            
+                                            <h4 class="panel-title">
+                                                {% if type.blogcategoryid == 2 %}
+                                                <a data-toggle="collapse" data-parent="#accordian" href="#sliver">
+                                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                    <h3 style="color: rgb(170, 105, 6);"> {{type.name}} </h3>
+                                                </a>
+                                                {% endif%}
+                                            </h4>
+                                        </div>
+                                        {% if type.displayorder == 4 %}
+                                        <div id="sliver" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="{% url 'homepage:blogcategory' type.blogcategoryid %}"> {{type.name}} </a></li>
+                                                   
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="panel panel-default">
+                                        {% for type in blogcategorylist %}
+                                        <div class="panel-heading">
+                                            
+                                            <h4 class="panel-title">
+                                                {% if type.blogcategoryid == 3 %}
+                                                <a data-toggle="collapse" data-parent="#accordian" href="#gold">
+                                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                    <h3 style="color: rgb(170, 105, 6);"> {{type.name}} </h3>
+                                                </a>
+                                                {% endif%}
+                                            </h4>
+                                        </div>
+                                        {% if type.displayorder == 2 %}
+                                        <div id="gold" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="{% url 'homepage:blogcategory' type.blogcategoryid %}"> {{type.name}} </a></li>
+                                                   
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="panel panel-default">
+                                        {% for type in blogcategorylist %}
+                                        <div class="panel-heading">
+                                            
+                                            <h4 class="panel-title">
+                                                {% if type.blogcategoryid == 4 %}
+                                                <a data-toggle="collapse" data-parent="#accordian" href="#shoes">
+                                                    <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                                                    <h3 style="color: rgb(170, 105, 6);"> {{type.name}} </h3>
+                                                </a>
+                                                {% endif%}
+                                            </h4>
+                                        </div>
+                                        {% if type.displayorder == 3 %}
+                                        <div id="shoes" class="panel-collapse collapse">
+                                            <div class="panel-body">
+                                                <ul>
+                                                    <li><a href="{% url 'homepage:blogcategory' type.blogcategoryid %}"> {{type.name}} </a></li>
+                                                   
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>        
+                               
+                            </ul>    
+                        </div>
+                       
+                        <div class="recent-post">
+                            <h4>Tin tức mới nhất</h4>
+                            {% for Blog in page_obj %}
+                            <div class="recent-blog">
+                                <a href="/blog/{{Blog.blogid}}" class="rb-item">
+                                    <div class="rb-pic">
+                                        <img src="{{Blog.blogimage.url}}" alt="">
+                                    </div>
+                                    <div class="rb-text">
+                                        <h6>{{Blog.title}} </h6>
+                                        <p> Ngày đăng <span>- {{Blog.createdate|date:"d-m-Y"}}</span></p>
+                                    </div>
+                                </a>
+                            </div>
+                            {% endfor %}   
+
+                        </div>
+                        
+                        <div class="blog-tags">
+                            <h4>Blog Tags</h4>
+                            
+                            <div class="tag-item">
+                            {% for Blog in page_obj %}
+                                <a href="/blog/{{Blog.blogid}}"> {{Blog.tagid}} </a>
+                            {% endfor %} 
+                            </div>
+                            
+                        </div>
+                          
+                        
+                    </div>
+                </div>
+
+                <div class="col-lg-9 order-1 order-lg-2">
+                    <div class="row">
+                            {% for Blog in page_obj %}
+                            <div class="col-md-4">
+                                <div class="card mb-4 shadow-sm">
+                                    <img class ="card-img-top" height= 250 src="{{Blog.blogimage.url}}">
+                                        <div class="card-body">
+                                            <h6 class="card-text" > {{Blog.title}} </h6>
+                                            <br>
+                                            <h4 > <i class="fa fa-calendar" style="font-size:24px"></i> Ngày đăng: {{Blog.createdate|date:"d-m-Y"}} </h4>
+                                            <i class="fa fa-eye" style="font-size:20px"></i> Lượt xem: {{Blog.viewcount}}
+                                                <div class="panel-footer">
+                                                    <br>
+                                                    <a href="/blog/{{Blog.blogid}}" class="btn btn-primary">  Xem chi tiết </a> 
+                                                </div>  
+                                        </div>
+                                </div>
+                            </div>
+                            {% endfor %}  
+                            <div class="col-lg-12">
+                                <div class="loading-more">
+                                    <i class="icon_loading"></i>
+                                    <a href="#">
+                                        Loading More
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
+    <div class="pagination justify-content-center">
+        <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a class="btn btn-info" href="?page=1" role="button">Trang Đầu</a>
+            <!-- <a href="?page=1">&laquo; Trang Đầu </a> -->
+            <a class="btn btn-secondary" href="?page={{ page_obj.previous_page_number }}" role="button"> Trang Trước </a>
+        {% endif %}
+        <span class="btn btn-outline-danger" class="current" role="button">
+            Trang {{ page_obj.number }} của {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a class="btn btn-secondary" href="?page={{ page_obj.next_page_number }}" role="button"> Trang Kế </a>
+            <a class="btn btn-info" href="?page={{ page_obj.paginator.num_pages }}" role="button"> Trang Cuối  &raquo;</a>
+        {% endif %}
+        </span>
     </div>
     <!-- Breadcrumb Section Begin -->
     

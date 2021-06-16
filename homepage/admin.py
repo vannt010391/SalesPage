@@ -37,3 +37,24 @@ class OrderItemAdmin(admin.ModelAdmin):
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
     list_display = ("contactid","email", "name", "messages","status","date",)
+
+
+# admin.site.register(BlogCategory)
+@admin.register(BlogCategory)
+class BlogCategoryAdmin(admin.ModelAdmin):
+    list_display = ("blogcategoryid", "parentid", "displayorder", "name", "createdate", "metaKeywords")
+
+# admin.site.register(Blog)
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ("blogcategoryid", "blogid", "title" ,"blogimage", "metaKeywords", "tagid")  
+
+class MyModelAdmin(admin.ModelAdmin):
+    list_display = ['tag_list']
+
+    def get_queryset(self, request):
+        return super().get_queryset(request).prefetch_related('tags')
+
+    def tag_list(self, obj):
+        return u", ".join(o.name for o in obj.tags.all())
+

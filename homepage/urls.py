@@ -14,7 +14,10 @@ urlpatterns = [
     path('register', views.register, name='register'),
     path('reply',views.reply,name='reply'),
     path('blog', views.blog, name='blog'),
-    path('feedback',views.feedback, name= 'feedback')
-    # path('blog/<int:id>', views.post),
+
+    path('feedback',views.feedback, name= 'feedback'),    
+    path('blog/<int:id>', views.post),
+    path('blogcategory/<int:id>', views.blogcategory, name='blogcategory'),
+    
 
 ]

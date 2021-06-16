@@ -6,6 +6,8 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.query import FlatValuesListIterable
 from django.http import request
 from django.utils import timezone
+from taggit.managers import TaggableManager
+
 # Create your models here.
 
 
@@ -85,6 +87,7 @@ class BlogCategory(models.Model):
     editeddate = models.DateTimeField(auto_now=True, blank=True, null=True)
     metaKeywords = models.CharField(max_length=50, blank=True, null=True)
     note = models.CharField(max_length=250, blank=True, null=True)
+    
 
     def __str__(self):
         return self.name
@@ -110,6 +113,7 @@ class Blog(models.Model):
     isenable = models.BooleanField(blank=True, null=True)
     viewcount = models.IntegerField(blank=True, null=True)
     tagid = models.CharField(max_length=50, blank=True, null=True)
+    tags = TaggableManager()
 
     def __str__(self):
         return self.title
@@ -157,6 +161,7 @@ class About(models.Model):
     class Meta:
         managed = True
         db_table = 'About'
+        
 STATUS_CONTACT = (
     ('WAIT', 'CHỜ XỬ LÝ'),
     ('SPAM', 'SPAM'),
