@@ -35,6 +35,7 @@ class ProductCategory(models.Model):
     productcategoryname = models.CharField(max_length=100)
     metatitle = models.CharField(max_length=250, blank=True, null=True)
     parentcategoryid = models.ForeignKey('self', models.DO_NOTHING, db_column='ParentCategoryId', blank=True, null=True) 
+    categorylevel = models.IntegerField(blank=True, null=True)
     displayoder = models.IntegerField(blank=True, null=True)
     SEOtitle = models.TextField(max_length=100, blank=True, null=True)
     createdate = models.DateTimeField(auto_now_add=True, blank=True, null=True)
@@ -173,7 +174,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=100, blank=True, null=False)
     messages = models.TextField(blank=True, null=False)
     status=models.CharField(choices=STATUS_CONTACT,default='WAIT',max_length=50)
-    date = models.DateField()  
+    date = models.DateField(blank=True, null=True)  
     class Meta:
         managed = True
         db_table = 'Contact'

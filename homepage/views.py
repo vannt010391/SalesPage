@@ -1,5 +1,6 @@
 from typing import Generic
 from django.core.exceptions import ValidationError
+from django.db.models.fields import NullBooleanField
 from django.http import response
 from collections import Counter
 from django.http.response import HttpResponseRedirect
@@ -120,7 +121,9 @@ def register(request):
 #     return render(request,'homepage/premium.html')
 
 def product(request):
-    productcategory_list = ProductCategory.objects.filter(isenable__exact=True)
+    productcategory_list = ProductCategory.objects.filter(isenable__exact=True, parentcategoryid__isnull=True)
+  
+    productcategory = ProductCategory.objects.filter(parentcategoryid__isnull=False)
 
     url_parameter = request.GET.get("search")
     if url_parameter:
@@ -141,8 +144,9 @@ def product(request):
     return render(request,'homepage/product.html', context)
 
 def productcategory(request, categoryid):
-    productcategory_list = ProductCategory.objects.filter(isenable__exact=True)
+    productcategory_list = ProductCategory.objects.filter(isenable__exact=True, parentcategoryid__isnull=True)
     category = ProductCategory.objects.get(productcategoryid=categoryid).productcategoryname
+
     products = Product.objects.filter(productcategoryid=categoryid)
     url_parameter = request.GET.get("search")
     if url_parameter:
@@ -156,6 +160,8 @@ def productcategory(request, categoryid):
         'category': category,
         'products': products,
         'page_obj': page_obj,
+        'productcategory': ProductCategory.objects.filter(parentcategoryid__isnull=False, parentcategoryid=categoryid),
+        'categoryid': categoryid,
     }
     return render(request,'homepage/product.html', context)
 
