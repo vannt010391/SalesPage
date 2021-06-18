@@ -23,11 +23,11 @@
     <section class="product-shop spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+                <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 products-sidebar-filter">
                    
                     <form autocomplete="on" action="">
-                    <div class="advanced-search">
-                        <h4 class="fw-title inner-header font-weight-bold" style="color: crimson;">Tìm kiếm sản phẩm</h4>
+                    <div class="advanced-search filter-widget">
+                        <h4 class="fw-title inner-header font-weight-bold m-0" style="color: crimson;">Tìm kiếm sản phẩm</h4>
                         <p></p>
                         <div class="filter-catagories input-group-prepend">
                             <input type="text" placeholder="Nhập từ khóa" name="search" id="search">
@@ -61,12 +61,45 @@
                     <div class="filter-widget">
                         <h4 class="fw-title inner-header font-weight-bold m-0" style="color: crimson;">Danh Mục Sản Phẩm</h4>
                         <div class="filter-catagories list-group list-group-flush">
-                            <a class="list-group-item list-group-item-action pl-0" href="{% url 'homepage:product' %}">All</a>
+                            <div class="row m-0">
+                                <div class="col-">
+                                    <a><i class="fa fa-caret-down pt-2" aria-hidden="true"></i></a>
+                                </div> 
+                                <div class="col">
+                                    <a class="list-group-item list-group-item-action pl-0" href="{% url 'homepage:product' %}">All</a>
+                                </div>
+                            </div> 
                             {% for type in productcategory_list %}
-                                <a class="list-group-item list-group-item-action pl-0" href="{% url 'homepage:productcategory' type.productcategoryid %}">
-                                    {{type.productcategoryname}}
-                                </a>
-                            {% endfor %}  
+                                    <div class="row m-0">
+                                        <div class="col-">
+                                            <a><i class="fa fa-caret-down pt-2" aria-hidden="true"></i></a>
+                                        </div>
+                                        <div class="col">
+                                            <a class="list-group-item list-group-item-action pl-0" href="{% url 'homepage:productcategory' type.productcategoryid %}">
+                                                {{type.productcategoryname}}
+                                            </a>  
+                                        </div>
+                                    </div>  
+                                    
+                                    {% if type.productcategoryid == categoryid %}
+                                        {% for p in productcategory %}    
+                                        <div class="row m-0">
+                                            <div class="col-">
+                                            </div>
+                                            <div class="col ml-2">
+                                                <a class="list-group-item list-group-item-action pl-0" href="{% url 'homepage:productcategory' p.productcategoryid %}">
+                                                    {{p.productcategoryname}}
+                                                </a> 
+                                            </div>
+                                        </div>  
+                                        <!--                                        
+                                            {% if p.parentcategoryid == type.productcategoryid%}
+                                                {{p.parentcategoryid}}
+                                            {% endif %} 
+                                        -->    
+                                        {% endfor %}
+                                    {% endif %}            
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -78,14 +111,14 @@
                             <div class="col-lg-4 col-sm-4">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="../../../media/{{product.productimage}}">
+                                        <img src="{{product.productimage.url}}">
                                         <div class="sale pp-sale"></div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="../../../media/{{product.productimage}}">+ Quick View</a></li>
+                                            <li class="quick-view"><a href="{{product.productimage.url}}">+ Quick View</a></li>
                                         </ul>
                                     </div>
                                     <div class="pi-text">
