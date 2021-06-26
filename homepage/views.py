@@ -21,6 +21,7 @@ import re
 from django import forms
 
 
+
 def index(request):
     products = Product.objects.all()
     slides = Slide.objects.all()
@@ -122,8 +123,12 @@ def register(request):
 
 def product(request):
     productcategory_list = ProductCategory.objects.filter(isenable__exact=True, parentcategoryid__isnull=True)
-  
-    productcategory = ProductCategory.objects.filter(parentcategoryid__isnull=False)
+    productcategory = ProductCategory.objects.filter(isenable__exact=True, parentcategoryid__isnull=False)
+
+    parent = {}
+    for p in productcategory_list:
+        parent[p.productcategoryid] = str(ProductCategory.objects.filter(isenable__exact=True, parentcategoryid=p.productcategoryid))
+
 
     url_parameter = request.GET.get("search")
     if url_parameter:
@@ -139,6 +144,8 @@ def product(request):
         'productcategory_list': productcategory_list,
         'products': products,
         'page_obj': page_obj,
+        'pp': productcategory,
+        'parent': parent,
     }
 
     return render(request,'homepage/product.html', context)
