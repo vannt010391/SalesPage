@@ -5,7 +5,7 @@ register = template.Library()
 
 @register.filter
 def getChilds(patentID):
-    return BlogCategory.objects.filter(parentid=patentID)
+    return BlogCategory.objects.filter(parent_id=patentID)
 
 @register.filter
 def hasChilds(patentID):

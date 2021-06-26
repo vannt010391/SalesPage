@@ -80,14 +80,14 @@ class BlogCategory(models.Model):
     blogcategoryid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=250)
     metatitle = models.CharField(max_length=250, blank=True, null=True)
-    parentid = models.ForeignKey('self', models.DO_NOTHING, db_column='ParentId', blank=True, null=True)
+    parent_id = models.IntegerField(blank=True, null=True)
+    parent_name = models.CharField(max_length=250,blank=True, null=True)
     displayorder = models.IntegerField(blank=True, null=True)
     SEOtitle = models.CharField(max_length=250, blank=True, null=True)
     createdate = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     editeddate = models.DateTimeField(auto_now=True, blank=True, null=True)
     metaKeywords = models.CharField(max_length=50, blank=True, null=True)
     note = models.CharField(max_length=250, blank=True, null=True)
-    
 
     def __str__(self):
         return self.name
@@ -173,7 +173,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=100, blank=True, null=False)
     messages = models.TextField(blank=True, null=False)
     status=models.CharField(choices=STATUS_CONTACT,default='WAIT',max_length=50)
-    date = models.DateField()  
+    date = models.DateField(auto_now_add=True, blank=True, null=True)  
     class Meta:
         managed = True
         db_table = 'Contact'
