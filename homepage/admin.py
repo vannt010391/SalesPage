@@ -42,7 +42,7 @@ class ContactAdmin(admin.ModelAdmin):
 # admin.site.register(BlogCategory)
 @admin.register(BlogCategory)
 class BlogCategoryAdmin(admin.ModelAdmin):
-    list_display = ("blogcategoryid", "parentid", "displayorder", "name", "createdate", "metaKeywords")
+    list_display = ("blogcategoryid", "parent_id", "displayorder", "parent_name", "name", "createdate", "metaKeywords")
 
 # admin.site.register(Blog)
 @admin.register(Blog)
