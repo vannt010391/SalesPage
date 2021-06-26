@@ -1,5 +1,6 @@
 from typing import Generic
 from django.core.exceptions import ValidationError
+from django.db.models.fields import NullBooleanField
 from django.http import response
 from collections import Counter
 from django.http.response import HttpResponseRedirect
@@ -18,6 +19,7 @@ from django.views import generic
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import re
 from django import forms
+
 
 
 def index(request):
@@ -120,7 +122,13 @@ def register(request):
 #     return render(request,'homepage/premium.html')
 
 def product(request):
-    productcategory_list = ProductCategory.objects.filter(isenable__exact=True)
+    productcategory_list = ProductCategory.objects.filter(isenable__exact=True, parentcategoryid__isnull=True)
+    productcategory = ProductCategory.objects.filter(isenable__exact=True, parentcategoryid__isnull=False)
+
+    parent = {}
+    for p in productcategory_list:
+        parent[p.productcategoryid] = str(ProductCategory.objects.filter(isenable__exact=True, parentcategoryid=p.productcategoryid))
+
 
     url_parameter = request.GET.get("search")
     if url_parameter:
@@ -136,13 +144,16 @@ def product(request):
         'productcategory_list': productcategory_list,
         'products': products,
         'page_obj': page_obj,
+        'pp': productcategory,
+        'parent': parent,
     }
 
     return render(request,'homepage/product.html', context)
 
 def productcategory(request, categoryid):
-    productcategory_list = ProductCategory.objects.filter(isenable__exact=True)
+    productcategory_list = ProductCategory.objects.filter(isenable__exact=True, parentcategoryid__isnull=True)
     category = ProductCategory.objects.get(productcategoryid=categoryid).productcategoryname
+
     products = Product.objects.filter(productcategoryid=categoryid)
     url_parameter = request.GET.get("search")
     if url_parameter:
@@ -156,6 +167,8 @@ def productcategory(request, categoryid):
         'category': category,
         'products': products,
         'page_obj': page_obj,
+        'productcategory': ProductCategory.objects.filter(parentcategoryid__isnull=False, parentcategoryid=categoryid),
+        'categoryid': categoryid,
     }
     return render(request,'homepage/product.html', context)
 

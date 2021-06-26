@@ -15,7 +15,7 @@ class SlideAdmin(admin.ModelAdmin):
 # admin.site.register(ProductCategory)
 @admin.register(ProductCategory)
 class ProductCategoryAdmin(admin.ModelAdmin):
-    list_display = ("productcategoryid","productcategoryname", "parentcategoryid","createdate" )
+    list_display = ("productcategoryid","productcategoryname", "parentcategoryid", "categorylevel", "createdate" )
 
 # admin.site.register(Product)
 @admin.register(Product)
