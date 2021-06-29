@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.core.mail import message
+from django.db.models.query_utils import refs_expression
 from django.http import request
 from collections import Counter
 from django.http.response import HttpResponseRedirect
@@ -29,7 +30,7 @@ from django.utils import timezone
 from django.urls import reverse
 from django.template.loader import render_to_string
 from django.contrib.auth.views import PasswordResetConfirmView
-
+from django.core.mail import send_mail
 # Create your views here.
 
 def index(request):
@@ -77,22 +78,28 @@ class mylogin(LoginView):
 
 
 class EditLogin(LoginRequiredMixin, TemplateView):
-    template_name = 'homepage/profile.html'
+    template_name = 'homepage/index.html'
 
 
 class RegisterForm(UserCreationForm):
-    email = forms.EmailField(max_length=50, required=True)
+    email = forms.EmailField(max_length=50, required=True,)
     password1 = forms.CharField(
         label=("Password"),
         strip=False,
         widget=forms.PasswordInput,
         help_text="Có ít nhất 8 kí tự bao gồm cả số và chữ",
     )
-
     class Meta:
         model = User
         fields = ("email", "username",)
         field_classes = {'username': UsernameField}
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        try:
+            User.objects.get(email=email)
+        except ObjectDoesNotExist:
+            return email
+        raise ValidationError('email đã tồn tại')
 
 
 class SiteRegisterView(FormView):
@@ -109,9 +116,46 @@ class SiteRegisterView(FormView):
 
         return redirect(url)
 
-class PasswordResetConfirm(PasswordResetConfirmView):
-    template_name ='homepage/password_confirm.html'
+def PasswordReset(request):
+    if request.method == 'GET':
+        form = ResetPassForm()
+    else:
+        form = ResetPassForm(request.POST)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            user = User.objects.get(email =email)
+            id = user.id
+            print(id)
+            token = uuid.uuid4()
+            subject = 'Đổi mật khẩu Salepage'
+            message = f"Chào bạn, Bấm vào đường link dưới đây để thay đổi mật khẩu của bạn http://127.0.0.1:8000/Reset_Pass_Confirm/{id}{token}"
+            email_form = settings.EMAIL_HOST_USER
+            recipient_list =[email]
+            send_mail(subject, message,email_form,recipient_list)
+            return render(request,'homepage/password_reset_done.html')
+    context = {'form': form}
+    return render(request,'homepage/reset_password.html',context)         
 
+
+def PasswordResetDoneView(request):
+    return(request,'homepage/password_reset_done.html')
+
+def ResetPassConfirmFormviews(request,id,token):
+    if request.method == 'GET':
+        form = ResetPassConfirmForm()
+    else:
+        form = ResetPassConfirmForm(request.POST)
+        if form.is_valid():
+            user = User.objects.get(id=id)
+            password = form.cleaned_data['password1']
+            user.set_password(password)
+            user.save()
+            return render(request,'homepage/password_reset_confirm_end.html')
+    context = {'form': form}
+    return render(request,'homepage/password_reset_confirm.html',context)
+
+def ResetPassConfirmFormEnd(request):
+    return render(request,'homepage/password_reset_confirm_end.html')
 
 # def premium(request):
 #     productcategory_list = ProductCategory.objects.all()
