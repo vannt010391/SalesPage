@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 import uuid
 from django.conf import settings
+import uuid
 def send_forget_password_mail(email,token):
     token = token
     subject = 'Đổi mật khẩu Salepage    '

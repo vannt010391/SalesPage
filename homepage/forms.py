@@ -77,13 +77,12 @@ class RegisterForm(forms.Form):
         raise ValidationError('email đã tồn tại')
 
     def save(self):
-        print(1)
         user = User.objects.create_user(username=self.cleaned_data['username'],
                                         email=self.cleaned_data['email'],
                                         password=self.cleaned_data['password2'])
 
 class ResetPassForm(forms.Form):
-    email = forms.EmailField(label='Email', max_length=50, required=False)
+    email = forms.EmailField(label='Email', max_length=50, required=True)
     def clean_email(self):
         email = self.cleaned_data['email']
         try:
@@ -93,6 +92,7 @@ class ResetPassForm(forms.Form):
         return email
         
 class ResetPassConfirmForm(forms.Form):
+    
     password1 = forms.CharField(
         label='Mật khẩu', widget=forms.PasswordInput(), min_length=8)
     password2 = forms.CharField(
@@ -104,8 +104,10 @@ class ResetPassConfirmForm(forms.Form):
             password2 = self.cleaned_data['password2']
             if password1 == password2 and password1:
                 return password2
-        print(password2)
         raise ValidationError('mật khẩu không hợp lệ')
+    
+
+
 
         
 

@@ -19,18 +19,8 @@ urlpatterns = [
     path('accounts/',include('django.contrib.auth.urls')),
     path('login/', views.mylogin.as_view(), name='login'),
     path('accounts/profile/', views.EditLogin.as_view(), name='profile'),
-    path('password_reset',
-        auth_views.PasswordResetView.as_view(
-            template_name = 'homepage/reset_password.html'
-        ),
-        name='password_reset'),
-    path('password_reset/done/',
-        auth_views.PasswordResetDoneView.as_view(
-            
-        ),
-        name='password_reset_done'),
-    path('password_reset_confirm/<uidb64>/<token>',views.PasswordResetConfirm.as_view(),
-        name='password_reset_confirm')
-    
-
+    path('password_reset',views.PasswordReset,name='password_reset'),
+    path('password_reset/done/', views.PasswordResetDoneView ,name='password_reset_done'),
+    path('Reset_Pass_Confirm/<int:id><token>',views.ResetPassConfirmFormviews, name='password_reset_confirm'),
+    path('Reset_Pass_Confirm_end',views.PasswordResetDoneView,name='Reset_Pass_Confirm_end')
 ]
