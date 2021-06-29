@@ -28,15 +28,10 @@
                 <div class="login-form">
                     <h2>Đăng nhập</h2>
                    
-                    <form method="post" enctype="multipart/form-data">
+                    <form action="" method="post">
                         {% csrf_token %}
                         <div class="group-input">
-                            <label for="username">Tên đăng nhập hoặc Email*</label>
-                            <input type="text" id="username" name="username" maxlength="30">
-                        </div>
-                        <div class="group-input">
-                            <label for="pass">Mật khẩu *</label>
-                            <input type="password" id="pass" name="password">
+                            {{ form.as_p }}
                         </div>
                         <div class="group-input gi-check">
                             <div class="gi-more">
@@ -45,7 +40,7 @@
                                     <input type="checkbox" id="save-pass">
                                     <span class="checkmark"></span>
                                 </label>
-                                <a href="#" class="forget-pass">Lấy lại mật khẩu</a>
+                                <a href="{% url 'homepage:password_reset' %}" class="forget-pass">Lấy lại mật khẩu</a>
                             </div>
                             <h5 style="color: red;">
                                 {%  if message %}
@@ -55,7 +50,9 @@
                                 
                         </div>
                         <button type="submit" class="site-btn login-btn">Đăng Nhập</button>
+                        
                     </form>
+                    
                     <div class="switch-login">
                         <a href="{% url 'homepage:register' %}" class="or-login">Hoặc Đăng ký tài khoản</a>
                     </div>

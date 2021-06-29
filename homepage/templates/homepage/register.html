@@ -26,37 +26,14 @@
             <div class="col-lg-6 offset-lg-3">
                 <div class="register-form">
                     <h2>Đăng ký tài khoản</h2>
-                    <form action="#">
-                        <!-- <div class="group-input">
-                            <label for="firstname">Họ *</label>
-                            <input type="text" id="firstname">
-                        </div>
-                        <div class="group-input">
-                            <label for="lastname">Tên *</label>
-                            <input type="text" id="lastname">
-                        </div> -->
-                        <div class="group-input">
-                            <label for="username">Tên đăng nhập hoặc Email *</label>
-                            <input type="text" id="username">
-                        </div>
-                        <!-- <div class="group-input">
-                            <label for="address">Địa chỉ *</label>
-                            <input type="text" id="address">
-                        </div> -->
-                        <div class="group-input">
-                            <label for="phonenumber">Số điện thoại *</label>
-                            <input type="number" id="phonenumber">
-                        </div>
-                        <div class="group-input">
-                            <label for="pass">Mật Khẩu *</label>
-                            <input type="text" id="pass">
-                        </div>
-                        <div class="group-input">
-                            <label for="con-pass">Xác nhận mật khẩu *</label>
-                            <input type="text" id="con-pass">
-                        </div>
-                        <button type="submit" class="site-btn register-btn">Đăng ký</button>
-                    </form>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class = "group-input">
+                                {{ form.as_p }}
+                            </div>
+                            <button type="submit" class="site-btn register-btn">Đăng ký</button>
+                        </form>
+                    
                     <div class="switch-login">
                         <a href="{% url 'homepage:login'%}" class="or-login">Hoặc Đăng nhập</a>
                     </div>
