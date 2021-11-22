@@ -173,7 +173,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=100, blank=True, null=False)
     messages = models.TextField(blank=True, null=False)
     status=models.CharField(choices=STATUS_CONTACT,default='WAIT',max_length=50)
-    date = models.DateField()  
+    date = models.DateField(default=timezone.now())  
     class Meta:
         managed = True
         db_table = 'Contact'
